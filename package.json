@@ -1,0 +1,17 @@
+{
+  "name": "ptudw_18127022_18127248",
+  "version": "1.0.0",
+  "description": "xay dung ung dung online course",
+  "main": "server.js",
+  "scripts": {
+    "test": "nthing",
+    "start": "node server.js"
+  },
+  "author": "Trang, Tuan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.11.1",
+    "morgan": "^1.10.0"
+  }
+}
