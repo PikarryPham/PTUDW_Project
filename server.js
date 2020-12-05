@@ -30,20 +30,19 @@ db.once("open", function () {
 app.engine("hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine", "hbs");
 
-// app.use(
-//   express.urlencoded({
-//     extended: true,
-//   })
-// );
-app.use(express.static(`${__dirname}/public`));
+app.use(express.static(`${__dirname}/public/`));
 
-app.get("/", function (req, res) {
+app.get("/", (req, res) => {
   res.render(`${__dirname}/public/index`, {
     title: "string",
   });
-  /**
-   * Lam lai theo kieu kia
-   */
+});
+
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+app.get("/register", (req, res) => {
+  res.render("register");
 });
 /**
  * Connect to server

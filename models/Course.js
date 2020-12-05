@@ -81,6 +81,12 @@ const courseSchema = new mongoose.Schema({
   /**
    * Rated???
    */
+  include: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Chapter",
+    },
+  ],
 });
 
 const User = mongoose.model("Course", courseSchema);
