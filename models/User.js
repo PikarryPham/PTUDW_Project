@@ -20,6 +20,11 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  dateRegister: {
+    type: Date,
+    required: false,
+    default: null,
+  },
   registed: [
     {
       /**

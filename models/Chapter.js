@@ -12,18 +12,8 @@ const chapterCourseSchema = new mongoose.Schema({
     required: false,
     min: 60,
   },
-  includeDoc: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Document",
-    },
-  ],
-  includeVideo: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Video",
-    },
-  ],
+  document: [],
+  video: [],
   beIncluded: { type: mongoose.Schema.Types.ObjectId, ref: "Course" },
 });
 
