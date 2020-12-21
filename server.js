@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
-const path = require("path");
-const path2 = require("path");
+
 const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");
 const port = process.env.PORT || 3000;
@@ -27,7 +26,10 @@ db.once("open", function () {
 /**
  * Phan trang
  */
-app.engine("hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));
+app.engine("hbs", exphbs({
+  defaultLayout: "main",
+  extname: ".hbs"
+}));
 app.set("view engine", "hbs");
 
 app.use(express.static(`${__dirname}/public/`));
