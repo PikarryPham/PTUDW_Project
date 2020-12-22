@@ -47,6 +47,7 @@ const courseSchema = new mongoose.Schema({
     required: true,
     min: [1, 'Price must greater or equal than 1']
   },
+
   imageCover: {
     type: String,
     required: [true, 'A course must have a cover image']
