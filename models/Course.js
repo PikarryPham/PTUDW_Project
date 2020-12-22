@@ -1,94 +1,105 @@
 const mongoose = require("mongoose");
 
 const courseSchema = new mongoose.Schema({
-  name: {
+  category: {
     type: String,
-    required: () => {
-      return this.name != "";
-    },
+    enum: ['IT', 'Business', 'Design', 'Languages', 'Marketing'],
+    default: 'IT'
   },
-  content: {
+  title: {
     type: String,
-    required: () => {
-      return this.content != "";
-    },
+    required: [true, 'Course must have name'],
+    unique: false,
+    trim: true,
+    maxlength: [40, 'A course name must have less or equal then 40 characters'],
+    minlength: [10, 'A course name must have more or equal then 10 characters']
+  },
+  instructors: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: [true, 'A Course must have name instructors']
+  },
+  duration: {
+    type: Number,
+    required: [true, 'A course must have a duration']
+  },
+  enrolled: {
+    type: Number,
+    default: 0,
+    min: [0, 'Enrolled must greater than or equal 0']
+  },
+  difficulty: {
+    type: String,
+    required: [true, 'A Course must have difficulty '],
+    enum: {
+      values: ['Beginners', 'Intermediate', 'Advanced'],
+      message: 'Difficulty is either : Beginners, Intermediate, Advanced '
+    }
+  },
+  ratingsAverage: {
+    type: Number,
+    default: 4.5,
+    min: [1, 'Ratting muse be above 1.0'],
+    max: [5, 'Ratting muse be above 1.0']
+  },
+  price: {
+    type: Number,
+    required: true,
+    min: [1, 'Price must greater or equal than 1']
+  },
+  imageCover: {
+    type: String,
+    required: [true, 'A course must have a cover image']
+  },
+  images: [String],
+  createAt: {
+    type: Date,
+    default: Date.now(),
+    select: false
   },
   description: {
     type: String,
-    required: () => {
-      return this.description != "";
-    },
+    maxlength: [40, 'A course description must have less or equal then 40 characters'],
+    minlength: [10, 'A course description must have more or equal then 10 characters']
   },
-  numOfStudentRating: {
-    type: Number,
-    required: false,
-    default: 0,
+  whatUserLearn: [{
+    type: String,
+    maxlength: [40, 'A course description must have less or equal then 40 characters'],
+    minlength: [10, 'A course description must have more or equal then 10 characters']
+  }],
+  learningObjectives: [{
+    type: String,
+    maxlength: [40, 'A course description must have less or equal then 40 characters'],
+    minlength: [10, 'A course description must have more or equal then 10 characters']
+  }],
+  priorKnowledge: {
+    type: String,
+    maxlength: [40, 'A course description must have less or equal then 40 characters'],
+    minlength: [10, 'A course description must have more or equal then 10 characters']
   },
-  numOfStudentRegister: {
-    type: Number,
-    required: false,
-    default: 0,
-  },
-  basicPrice: {
-    type: Number,
-    required: true,
-    min: 9,
-  },
-  lastUpdate: {
+  createAt: {
     type: Date,
     required: true,
-    default: Date.now,
+    default: Date.now(),
   },
   postDate: {
     type: Date,
     required: true,
-    default: Date.now,
+    default: Date.now(),
   },
-  status: {
-    type: Number,
-    required: () => {
-      return this.status != "";
-    },
+  users: [{
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
+  }]
+}, {
+  toJSON: {
+    virtuals: true
   },
-  img: {
-    type: String,
-    required: false,
-  },
-  salePrice: {
-    type: Number,
-    required: true,
-    min: 9,
-  },
-  beRegisted: [
-    {
-      /**
-       * Date registed??? nen luu ntn
-       */
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
-  beLoved: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
-  beTeached: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
-  /**
-   * Rated???
-   */
-  include: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Chapter",
-    },
-  ],
+  toObject: {
+    virtuals: true
+  }
 });
 
-const User = mongoose.model("Course", courseSchema);
+const Course = mongoose.model("Course", courseSchema);
 
 module.exports = Course;

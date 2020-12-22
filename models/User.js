@@ -1,51 +1,56 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    require: true,
-  },
-  password: {
-    type: String,
-    required: () => {
-      return this.this.password != "";
-    },
-    minlength: 6,
-  },
   name: {
     type: String,
-    required: false,
+    required: [true, 'Please tell us your name']
+
   },
-  typeOfUser: {
-    type: Number,
-    required: true,
+  email: {
+    type: String,
+    required: [true, 'Please provide your email'],
+    unique: true,
+    lowercase: true,
   },
-  dateRegister: {
+  role: {
+    type: String,
+    enum: ['user', 'instructors', 'admin'],
+    default: 'user'
+  },
+
+  password: {
+    type: String,
+    required: [true, 'Please provide by password'],
+    minlength: 8,
+    select: false
+  },
+  passwordConfirm: {
+    type: String,
+    required: [true, 'Please confirm your password'],
+    validate: {
+      // This only works CREATE on SAVE !!
+      validator: function (el) {
+        return el === this.password;
+      },
+      message: 'Passwords are not the same!'
+    }
+  },
+  passwordChangedAt: Date,
+  passwordResetToken: String,
+  passwordResetExpires: Date,
+  createAt: {
     type: Date,
-    required: false,
-    default: null,
+    default: new Date(),
   },
-  registed: [
-    {
-      /**
-       * date registed?
-       */
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Course",
-    },
-  ],
-  love: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Course",
-    },
-  ],
-  teach: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Course",
-    },
-  ],
+  active: {
+    type: Boolean,
+    default: true,
+    select: false
+  },
+  wishCourse: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Course",
+  }]
 });
 
 const User = mongoose.model("User", userSchema);
