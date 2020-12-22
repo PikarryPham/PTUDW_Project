@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const bcrypt = require('bcryptjs');
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -51,6 +51,17 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Course",
   }]
+});
+userSchema.pre('save', async function (next) {
+  // ONLY run this function if password was actually modified
+  if (!this.isModified('password')) return next();
+
+  // HASH the password with cost of 12
+  this.password = await bcrypt.hash(this.password, 12);
+
+  // DELETE PASSWORD confirm fields
+  this.passwordConfirm = undefined;
+  next();
 });
 
 const User = mongoose.model("User", userSchema);

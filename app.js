@@ -1,27 +1,24 @@
 const express = require('express');
 const exphbs = require("express-handlebars");
-
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
 const app = express();
+const userRouter = require('./routes/userRoutes')
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
 
-app.use(express.json());
-
+// parse application/json
+app.use(bodyParser.json())
+app.use(cookieParser(process.env.COOKIES_SECRET));
 app.engine("hbs", exphbs({
+    defaultLayout: "main",
     extname: ".hbs"
 }));
-
-app.use(express.static(`${__dirname}/public/`));
 app.set("view engine", "hbs");
 
-app.get('/', (req, res) => {
-    res.render("index", {
+app.use(express.static(`${__dirname}/public/`));
+app.use('/', userRouter)
 
-    });
-})
-app.get("/login", (req, res) => {
-    res.render("login");
-});
-app.get("/register", (req, res) => {
-    res.render("register");
-});
 
 module.exports = app;
