@@ -1,0 +1,137 @@
+{
+    "data": [{
+            "category": "IT",
+            "title": "JavaScript: The Advanced Concepts",
+            "description": "Learn modern, advanced JavaScript practices and be in the top 10% of JavaScript developers.",
+            "duration": 3,
+            "difficulty": "Advanced",
+            "ratingsAverage": 4.5,
+            "price": 19.9,
+            "imageCover": "https://images.ctfassets.net/aq13lwl6616q/llkUpPk1NrKR5BMEcfyrc/42ebd1b27f3adb25c4a73fa6de52cd06/advanced_javascript_concepts_cover_photo_new.png?w=800&h=450&q=50&fm=webp",
+            "whatUserLearn": [
+                "Improve your productivity, get things done, and find more time for what’s most important with Time Management Tips. This weekly series provides actionable time management techniques to help people better manage their time and ultimately become more productive. Time management expert Dave Crenshaw provides a new tip every Monday, touching on a wide variety of topics. Tune in to learn about everything from managing emails and calendars to setting priorities, collaborating with coworkers, reducing interruptions, crafting a “productivity mindset,” and creating a more comfortable and effective work environment."
+            ],
+            "learningObjectives": [
+                "Advanced JavaScript Practices",
+                "Object Oriented Programming",
+                "Scope and Execution Context",
+                "Latest features: ES6, ES7, ES8, ES9, ES10, ES2020",
+                "`this` keyword"
+            ],
+            "priorKnowledge": "Improve your productivity, get things done, and find more time for what’s most important with Time Management Tips. This weekly series provides actionable time management techniques to help people better manage their time and ultimately become more productive. Time management expert Dave Crenshaw provides a new tip every Monday, touching on a wide variety of topics.",
+            "instructors": "5fe21edd6a2def30ff892483"
+        }, {
+            "category": "IT",
+            "title": "The Complete Junior to Senior Web Developer Roadmap (2021)",
+            "description": "Go from Junior Developer to Senior Developer. Learn all the technical skills Senior Web Developers know in 2021!",
+            "duration": 3,
+            "difficulty": "Intermediate",
+            "ratingsAverage": 4.2,
+            "price": 28.9,
+            "imageCover": "https://images.ctfassets.net/aq13lwl6616q/1zD5vKKiY0hUL1MAGB6bn2/137427172c25ab3409c50c040cbdfc98/JTS.png?w=800&h=450&q=50&fm=webp",
+            "whatUserLearn": [
+                "Skills that will allow you to apply for jobs in these roles: Web Developer, Software Developer, Front End Developer, Javascript Developer, or Full Stack Developer"
+            ],
+            "learningObjectives": [
+                "Have a full featured image recognition app to put onto your portfolio that will wow any employer",
+                "Lead technical projects as a Senior Developer",
+                "Master advanced and modern fundamental concepts in web development",
+                "You will no longer be or feel like a Junior Developer",
+                "Learn the technologies that are being used behind the biggest tech companies in 2021"
+            ],
+            "priorKnowledge": "Prepare to learn real life skills and build real web apps that will get you hired",
+            "instructors": "5fe21edd6a2def30ff892483"
+        },
+        {
+            "category": "Marketing",
+            "title": "The Complete Digital Marketing Course - 12 Courses in 1",
+            "description": "Master Digital Marketing Strategy, Social Media Marketing, SEO, YouTube, Email, Facebook Marketing, Analytics & More!",
+            "duration": 2,
+            "difficulty": "Beginners",
+            "ratingsAverage": 3,
+            "price": 28.9,
+            "imageCover": "https://img-a.udemycdn.com/course/240x135/914296_3670_8.jpg?x9Yma0V8NWXnTw7JgIzSnVYl5blmyDLhsXMcMigDB85TP0R1oxjiRFMGohKQfDxZJqTupNjfSjIer1R7kHnKywSWllAzm0ghlEz6ztB1iDHGrAVr8Ip5RIEmJX62",
+            "whatUserLearn": [
+                " The course is hugely interactive with projects, checklists &actionable lectures built into every section. Learn step by step how to market a business online from scratch across all the major marketing channels.Follow the steps on screen to get results at work,for own business or for your digital marketing clients."
+            ],
+            "learningObjectives": [
+                "Grow a Business Online From Scratch",
+                "Land a High-Paying Job in Digital Marketing",
+                "Make Money as an Affiliate Marketer",
+                "Work From Home as a Freelance Marketer"
+            ],
+            "priorKnowledge": "Suitable for all types of businesses (digital product, physical product, service, B2B, B2C).",
+            "instructors": "5fe21edd6a2def30ff892483"
+        },
+        {
+            "category": "Business",
+            "title": "Fundamentals of Business Analysis",
+            "description": "Get the foundation in business analysis you need to solve your organization's biggest problems.",
+            "duration": 4,
+            "difficulty": "Beginners",
+            "ratingsAverage": 4.2,
+            "price": 99,
+            "imageCover": "https://img-a.udemycdn.com/course/240x135/214008_bb0c_4.jpg?DZz3_7YmxQWDR7KpmPCRZB9eoDqMNweV38DoLNPFzskyEET4MXfl6ngVGo4MBZYHPSj-cjHlUDyOTLzuVrd2zG8NdsLg_yuuEIygdfT06kWsLddh2cKGSzgDRDHF",
+            "whatUserLearn": [
+                " Our courses focus on how analysis is performed in the real world, and they're full of examples, case studies and lessons learned from actual Business Analysts on the job.",
+                "This is a perfect first course in any business analysis curriculum."
+            ],
+            "learningObjectives": [
+                "Learn how to analyze, diagram and model requirements",
+                "Learn how to manage requirements assets after the project is complete",
+                "Learn the foundations of business analysis",
+                "Learn how to gather requirements from stakeholders and documentary sources",
+                "Learn how to present requirements effectively and gain acceptance"
+            ],
+            "priorKnowledge": "Suitable for all types of businesses (digital product, physical product, service, B2B, B2C).",
+            "instructors": "5fe21edd6a2def30ff892483"
+        },
+        {
+            "category": "Languages",
+            "title": "The Secrets of Body Language",
+            "description": "Learn how to interpret the body language of the people around you while perfecting your own nonverbal communication.",
+            "duration": 5,
+            "difficulty": "Beginners",
+            "ratingsAverage": 4,
+            "price": 199,
+            "imageCover": "https://img-a.udemycdn.com/course/240x135/38266_41b6_10.jpg?7Zmsd0BsE16Uy-1aHVtEIxh8uNRMcwGua_kZ7WDH07GBWxUUB9uq5hdrtTZYGd7a6n1Mgl8-vU2MrAWro5Pb7qYTDcZ1FzwXPQw2LnG_K2nSvSyPbTaDPsDAPbCC",
+            "whatUserLearn": [
+                " Do you ever wish you could know what someone is thinking? Or perhaps you want to improve your own non-verbal communication? Body language is a great way to gain insights into how others think and feel, as well improve your everyday communication with others.",
+                "This body language course is based on scientifically-backed research, and is designed to teach you how to read people's nonverbal behavior and improve your own."
+            ],
+            "learningObjectives": [
+                "How to read body language",
+                "How to read people",
+                "How to spot lies",
+                "Body language for women",
+                "Body language for men"
+            ],
+            "priorKnowledge": "Computer speakers",
+            "instructors": "5fe21edd6a2def30ff892483"
+        },
+        {
+            "category": "Design",
+            "title": "Complete Web & Mobile Designer in 2021: UI/UX, Figma + more",
+            "description": "Get hired as a designer in 2021! This is the only design bootcamp you need to learn and master web & mobile design, UI & UX, and HTML & CSS",
+            "duration": 10,
+            "difficulty": "Intermediate",
+            "ratingsAverage": 4,
+            "price": 199,
+            "imageCover": "https://images.ctfassets.net/aq13lwl6616q/75XmCBS35kqsky2S2mtuoP/6938210a367b1e151bcd9edb69b842a5/image.png?w=800&h=450&q=50&fm=webp",
+            "whatUserLearn": [
+                " Build beautifully designed web and mobile projects for your customers using modern tools used by top companies in 2021",
+                "Immediate access to 100+ assets and premium design templates that you can keep and use to customize all your future projects"
+            ],
+            "learningObjectives": [
+                "Get hired as a Designer or become a freelancer that can work from anywhere and for anyone. Designers are in high demand!",
+                "Have an amazing design portfolio customized and professionally completed by the end of the course (we provide it for you!)",
+                "Learn to design for all types of devices using Figma and other tools used by some of the top designers in the world",
+                "Learn to use HTML5 and CSS3 to make your designs come to life and create fully working websites",
+                "Learn to make professional logos and design choices for all branding needs"
+            ],
+            "priorKnowledge": "No More",
+            "instructors": "5fe21edd6a2def30ff892483"
+        }
+
+    ]
+}

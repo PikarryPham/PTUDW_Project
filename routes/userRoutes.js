@@ -4,6 +4,7 @@ const authController = require('./../controllers/authController');
 
 const router = express.Router();
 router.get('/', authController.index)
+router.get('/logout', authController.getLogout)
 router
     .route('/register')
     .get(authController.getRegister)

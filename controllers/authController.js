@@ -1,6 +1,7 @@
 const catchAsync = require("../utils/catchAsync");
-
+//const AppError = require('../utils/appError');
 const User = require('../models/User');
+const Course = require("../models/Course");
 
 const createdSendCookie = (user, res) => {
 
@@ -18,23 +19,60 @@ const createdSendCookie = (user, res) => {
 
 };
 exports.postLogin = catchAsync(async (req, res, next) => {
-    console.log("hello")
-    console.log(req.body)
+    const {
+        email,
+        password
+    } = req.body;
+
+    // 1) CHECK IF EMAIL AND PASSWORD exits
+    if (!email || !password) {
+
+        res.render('login', {
+            error: 'Please provide email and password !'
+        });
+        return;
+        //return next(new AppError('Please provide email and password !', 400));
+    }
+    // 2) CHECK IF USER  EXITS && PASSWORD IS CORRECT
+    const user = await User.findOne({
+        email
+    }).select('+password');
+    const correct = await user.correctPassword(password, user.password);
+
+    if (!user || !correct) {
+        res.render('login', {
+            error: 'Incorrect email or password'
+        });
+        return;
+    }
+    createdSendCookie(user, res);
 })
 exports.postRegister = catchAsync(async (req, res, next) => {
     const newUser = await User.create(req.body);
     createdSendCookie(newUser, res)
-
 })
 exports.getLogin = async (req, res, next) => {
-    console.log('Login called')
+
+    if (req.signedCookies.jwt) {
+        res.redirect('/')
+        return;
+    }
     res.render("login");
 }
 exports.getRegister = async (req, res, next) => {
-    console.log('Login called')
+
     res.render("register")
 }
-exports.index = (req, res) => {
-    console.log(req.signedCookies)
-    res.render("index");
+exports.index = async (req, res) => {
+    const user = await User.findById(req.signedCookies.jwt).lean();
+    const courses = await Course.find().lean();
+    res.render("index", {
+        user,
+        courses,
+    });
+}
+
+exports.getLogout = async (req, res) => {
+    res.clearCookie("jwt");
+    res.redirect("/login");
 }

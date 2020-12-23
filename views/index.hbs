@@ -120,8 +120,11 @@
 								<a class="active"
 									href="/">Home</a>
 							</li>
-
-							<li><a href="/">Marketing</a>
+							<li><a
+									href="/course">Courses</a>
+							</li>
+							<li><a
+									href="/course?title=Marketing">Marketing</a>
 							</li>
 							<li class="drop-link">
 								<a href="blog.html">Information
@@ -170,6 +173,7 @@
 
 								</ul>
 							</li>
+
 							<li><a href="/">Languages</a>
 							</li>
 							<li>
@@ -182,10 +186,37 @@
 
 
 						</ul>
+						{{#if user}}
+						<ul class="navbar-nav navbar-right">
+							<li class="drop-link">
+								<a href="/">{{user.name}}
+									<i
+										class="fa fa-angle-down"></i></a>
+								<ul class="dropdown level2">
+									<li><a
+											href="{{user.name}}/profile">
+											Profile
+										</a>
+									</li>
+									<li><a
+											href="{{user.name}}/instructors">
+											Instructors
+										</a>
+									</li>
+									<li><a href="/logout">
+											Log Out
+										</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						{{else}}
 						<a href="/login"
 							class="register-modal-opener login-button"><i
 								class="material-icons">perm_identity</i>
 							Login</a>
+						{{/if}}
+
 					</div>
 				</div>
 			</nav>
@@ -510,7 +541,7 @@
 								data-splitout="none"
 								data-actions=''
 								data-responsive_offset="on">
-								Learn More
+								Enroll Now!
 							</a>
 
 						</li>
@@ -572,8 +603,7 @@
 								data-splitout="none"
 								data-responsive_offset="on"
 								style="z-index: 6; min-width: 370px; max-width: 450px; white-space: normal;text-align:left;">
-								Credit Courses <br> Toward
-								Degrees
+								Complete <br> Business
 							</div>
 
 							<!-- LAYER NR. 3 -->
@@ -662,7 +692,7 @@
 								data-splitout="none"
 								data-actions=''
 								data-responsive_offset="on">
-								Learn More
+								Enroll Now!
 							</a>
 
 						</li>
@@ -814,7 +844,7 @@
 								data-splitout="none"
 								data-actions=''
 								data-responsive_offset="on">
-								Learn More
+								Enroll Now!
 							</a>
 
 						</li>
@@ -1080,7 +1110,7 @@
 							<div class="collection-post">
 								<div
 									class="inner-collection">
-									<img src="upload/collection/web-development.jpg"
+									<img src="upload/collection/web-development.webp"
 										alt="">
 									<a href="#"
 										class="hover-post">
@@ -1098,7 +1128,7 @@
 							<div class="collection-post">
 								<div
 									class="inner-collection">
-									<img src="upload/collection/web-design.jpg"
+									<img src="upload/collection/desgin.webp"
 										alt="">
 									<a href="#"
 										class="hover-post">
@@ -1114,7 +1144,7 @@
 							<div class="collection-post">
 								<div
 									class="inner-collection">
-									<img src="upload/collection/technology.jpg"
+									<img src="upload/collection/technology.webp"
 										alt="">
 									<a href="#"
 										class="hover-post">
@@ -1131,7 +1161,7 @@
 							<div class="collection-post">
 								<div
 									class="inner-collection">
-									<img src="upload/collection/photography.jpg"
+									<img src="upload/collection/photography.webp"
 										alt="">
 									<a href="#"
 										class="hover-post">
@@ -1146,7 +1176,7 @@
 							<div class="collection-post">
 								<div
 									class="inner-collection">
-									<img src="upload/collection/design.jpg"
+									<img src="upload/collection/desgin.webp"
 										alt="">
 									<a href="#"
 										class="hover-post">
@@ -1243,13 +1273,14 @@
 				<div class="popular-courses-box">
 					<div class="row">
 
+						{{#each courses}}
 						<div class="col-lg-3 col-md-6">
 							<div class="course-post">
 								<div
 									class="course-thumbnail-holder">
 									<a
 										href="single-course.html">
-										<img src="upload/courses/1.jpg"
+										<img src="{{this.imageCover}}"
 											alt="">
 									</a>
 								</div>
@@ -1260,10 +1291,7 @@
 										<h2
 											class="course-title">
 											<a
-												href="single-course.html">Introduction
-												Web Design
-												with
-												HTML</a>
+												href="single-course.html">{{this.title}}</a>
 										</h2>
 										<div
 											class="course-rating-teacher">
@@ -1272,72 +1300,14 @@
 												<span
 													style="width:100%">
 													<span
-														class="rating">5.00</span>
-													<span
-														class="votes-number">1
-														Votes</span>
-												</span>
-											</div>
-											<a href="#"
-												class="course-loop-teacher">Duha
-												Samra</a>
-										</div>
-									</div>
-									<div
-										class="course-content-bottom">
-										<div
-											class="course-students">
-											<i
-												class="material-icons">group</i>
-											<span>64</span>
-										</div>
-										<div
-											class="course-price">
-											<span>£244</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6">
-							<div class="course-post">
-								<div
-									class="course-thumbnail-holder">
-									<a
-										href="single-course.html">
-										<img src="upload/courses/2.jpg"
-											alt="">
-									</a>
-								</div>
-								<div
-									class="course-content-holder">
-									<div
-										class="course-content-main">
-										<h2
-											class="course-title">
-											<a
-												href="single-course.html">Special
-												Education
-												Needs
-												Teaching</a>
-										</h2>
-										<div
-											class="course-rating-teacher">
-											<div class="star-rating has-ratings"
-												title="Rated 5.00 out of 5">
-												<span
-													style="width:100%">
-													<span
-														class="rating">3.50</span>
+														class="rating">{{this.ratingAverage}}</span>
 													<span
 														class="votes-number">2
 														Votes</span>
 												</span>
 											</div>
 											<a href="#"
-												class="course-loop-teacher">Leon
-												Redding</a>
+												class="course-loop-teacher">{{this.instructors}}</a>
 										</div>
 									</div>
 									<div
@@ -1346,127 +1316,17 @@
 											class="course-students">
 											<i
 												class="material-icons">group</i>
-											<span>134</span>
+											<span>{{this.enrolled}}</span>
 										</div>
 										<div
 											class="course-price">
-											<span>£74.99</span>
+											<span>£{{this.price}}</span>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
-						<div class="col-lg-3 col-md-6">
-							<div class="course-post">
-								<div
-									class="course-thumbnail-holder">
-									<a
-										href="single-course.html">
-										<img src="upload/courses/3.jpg"
-											alt="">
-									</a>
-								</div>
-								<div
-									class="course-content-holder">
-									<div
-										class="course-content-main">
-										<h2
-											class="course-title">
-											<a
-												href="single-course.html">Environmental
-												Science BTEC
-												Course</a>
-										</h2>
-										<div
-											class="course-rating-teacher">
-											<div class="star-rating has-ratings"
-												title="Rated 5.00 out of 5">
-												<span
-													style="width:100%">
-													<span
-														class="rating">No
-														Votes</span>
-												</span>
-											</div>
-											<a href="#"
-												class="course-loop-teacher">Linda
-												Castello</a>
-										</div>
-									</div>
-									<div
-										class="course-content-bottom">
-										<div
-											class="course-students">
-											<i
-												class="material-icons">group</i>
-											<span>0</span>
-										</div>
-										<div
-											class="course-price">
-											<span>£18.99</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6">
-							<div class="course-post">
-								<div
-									class="course-thumbnail-holder">
-									<a
-										href="single-course.html">
-										<img src="upload/courses/4.jpg"
-											alt="">
-									</a>
-								</div>
-								<div
-									class="course-content-holder">
-									<div
-										class="course-content-main">
-										<h2
-											class="course-title">
-											<a
-												href="single-course.html">Distance
-												Learning MBA
-												Management</a>
-										</h2>
-										<div
-											class="course-rating-teacher">
-											<div class="star-rating has-ratings"
-												title="Rated 5.00 out of 5">
-												<span
-													style="width:100%">
-													<span
-														class="rating">4.50</span>
-													<span
-														class="votes-number">2
-														Votes</span>
-												</span>
-											</div>
-											<a href="#"
-												class="course-loop-teacher">Michael
-												Arnett</a>
-										</div>
-									</div>
-									<div
-										class="course-content-bottom">
-										<div
-											class="course-students">
-											<i
-												class="material-icons">group</i>
-											<span>263</span>
-										</div>
-										<div
-											class="course-price">
-											<span>£29.99</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
+						{{/each}}
 					</div>
 				</div>
 			</div>

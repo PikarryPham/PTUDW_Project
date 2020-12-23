@@ -67,6 +67,12 @@
       </div>
       <div class="account-form-inner">
         <div class="account-container">
+          {{#if error}}
+          <div class="alert alert-danger" role="alert">
+            {{error}}
+          </div>
+          {{else}}
+          {{/if}}
           <div class="heading-bx left">
             <h2 class="title-head">Sign Up <span>Now</span>
             </h2>

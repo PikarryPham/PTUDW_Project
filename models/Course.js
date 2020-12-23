@@ -11,8 +11,8 @@ const courseSchema = new mongoose.Schema({
     required: [true, 'Course must have name'],
     unique: false,
     trim: true,
-    maxlength: [40, 'A course name must have less or equal then 40 characters'],
-    minlength: [10, 'A course name must have more or equal then 10 characters']
+    maxlength: [1000, 'A course name must have less or equal then 1000 characters'],
+    minlength: [5, 'A course name must have more or equal then 5 characters']
   },
   instructors: {
     type: mongoose.Schema.ObjectId,
@@ -60,23 +60,23 @@ const courseSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    maxlength: [40, 'A course description must have less or equal then 40 characters'],
-    minlength: [10, 'A course description must have more or equal then 10 characters']
+    maxlength: [1000, 'A course description must have less or equal then 1000 characters'],
+    minlength: [5, 'A course description must have more or equal then 5 characters']
   },
   whatUserLearn: [{
     type: String,
-    maxlength: [40, 'A course description must have less or equal then 40 characters'],
-    minlength: [10, 'A course description must have more or equal then 10 characters']
+    maxlength: [1000, 'A course description must have less or equal then 1000 characters'],
+    minlength: [5, 'A course description must have more or equal then 5 characters']
   }],
   learningObjectives: [{
     type: String,
-    maxlength: [40, 'A course description must have less or equal then 40 characters'],
-    minlength: [10, 'A course description must have more or equal then 10 characters']
+    maxlength: [1000, 'A course description must have less or equal then 1000 characters'],
+    minlength: [5, 'A course description must have more or equal then 5 characters']
   }],
   priorKnowledge: {
     type: String,
-    maxlength: [40, 'A course description must have less or equal then 40 characters'],
-    minlength: [10, 'A course description must have more or equal then 10 characters']
+    maxlength: [1000, 'A course description must have less or equal then 1000 characters'],
+    minlength: [5, 'A course description must have more or equal then 5 characters']
   },
   createAt: {
     type: Date,
@@ -88,10 +88,6 @@ const courseSchema = new mongoose.Schema({
     required: true,
     default: Date.now(),
   },
-  users: [{
-    type: mongoose.Schema.ObjectId,
-    ref: 'User'
-  }]
 }, {
   toJSON: {
     virtuals: true
