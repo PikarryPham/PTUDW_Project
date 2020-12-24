@@ -705,27 +705,30 @@
 								</li>
 							</ul>
 							{{#if user}}
-							<form class="add-review">
+							<form class="add-review"
+								method="POST"
+								action="/course/{{course._id}}/reviews">
 								<h1>Add a Review</h1>
 								<label>Your
 									rating</label>
-								<select>
-									<option>Rate...
+								<select required
+									name="rating">
+
+									<option>1
 									</option>
-									<option>Perfect
+									<option>2
 									</option>
-									<option>Good
+									<option>3
 									</option>
-									<option>Average
+									<option>4
 									</option>
-									<option>Not that bad
-									</option>
-									<option>Very Poor
+									<option>5
 									</option>
 								</select>
 								<label>Your
 									Review</label>
-								<textarea></textarea>
+								<textarea required
+									name="review"></textarea>
 								<button
 									type="submit">Submit</button>
 							</form>

@@ -1,8 +1,10 @@
 const catchAsync = require("../utils/catchAsync");
 const Course = require("../models/Course");
 const APIFeatures = require('../utils/apiFeatures');
+const User = require("../models/User");
 exports.getAllCourses = catchAsync(async (req, res, next) => {
     let features;
+    const user = await User.findById(req.signedCookies.jwt).lean();
     if (req.query.title) {
         features = new APIFeatures(Course.find({
             "title": {
@@ -18,9 +20,11 @@ exports.getAllCourses = catchAsync(async (req, res, next) => {
         length: courses.length,
         courses,
         atCourse: true,
+        user,
     });
 })
 exports.getOneCourse = catchAsync(async (req, res, next) => {
+
     const {
         id
     } = req.params;

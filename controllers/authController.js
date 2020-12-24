@@ -80,5 +80,20 @@ exports.index = async (req, res) => {
 
 exports.getLogout = async (req, res) => {
     res.clearCookie("jwt");
-    res.redirect("/login");
+    res.redirect("/login", {
+        layout: false
+    });
 }
+exports.restrictTo = (...roles) => {
+    return async (req, res, next) => {
+        const user = await User.findById(req.signedCookies.jwt);
+        // roles ['admin', 'instructors']. role = 'user'
+        //console.log(req.user);
+        if (!roles.includes(user.role)) {
+            return next(
+                new AppError('You  do not have permission to perform this action', req.originalUrl)
+            );
+        }
+        next();
+    };
+};
