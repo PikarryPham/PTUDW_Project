@@ -10,6 +10,7 @@ const courseSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Course must have name'],
     unique: false,
+    uppercase: true,
     trim: true,
     maxlength: [1000, 'A course name must have less or equal then 1000 characters'],
     minlength: [5, 'A course name must have more or equal then 5 characters']
@@ -96,7 +97,13 @@ const courseSchema = new mongoose.Schema({
     virtuals: true
   }
 });
-
+courseSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'instructors',
+    select: '-__v -_id -passwordChangedAt'
+  });
+  next();
+});
 const Course = mongoose.model("Course", courseSchema);
 
 module.exports = Course;

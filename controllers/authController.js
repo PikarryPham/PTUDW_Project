@@ -2,9 +2,9 @@ const catchAsync = require("../utils/catchAsync");
 //const AppError = require('../utils/appError');
 const User = require('../models/User');
 const Course = require("../models/Course");
+const APIFeatures = require("../utils/apiFeatures");
 
 const createdSendCookie = (user, res) => {
-
     const cookieOptions = {
         expires: new Date(
             Date.now() + process.env.JWT_COOKIE_IN * 24 * 60 * 60 * 1000
@@ -57,15 +57,21 @@ exports.getLogin = async (req, res, next) => {
         res.redirect('/')
         return;
     }
-    res.render("login");
+    res.render("login", {
+        layout: false
+    });
 }
 exports.getRegister = async (req, res, next) => {
 
-    res.render("register")
+    res.render("register", {
+        layout: false
+    })
 }
 exports.index = async (req, res) => {
     const user = await User.findById(req.signedCookies.jwt).lean();
-    const courses = await Course.find().lean();
+    req.query.limit = 4;
+    const features = new APIFeatures(Course.find(), req.query).paginate();
+    const courses = await features.query.lean()
     res.render("index", {
         user,
         courses,
