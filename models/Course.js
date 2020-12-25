@@ -39,8 +39,8 @@ const courseSchema = new mongoose.Schema({
   },
   ratingsAverage: {
     type: Number,
-    default: 4.5,
-    min: [1, 'Ratting muse be above 1.0'],
+    default: 0,
+    min: [0, 'Ratting muse be above 0.0'],
     max: [5, 'Ratting muse be above 1.0']
   },
   price: {
@@ -97,13 +97,24 @@ const courseSchema = new mongoose.Schema({
     virtuals: true
   }
 });
+courseSchema.virtual('reviews', {
+  ref: 'Review',
+  foreignField: 'course',
+  localField: '_id'
+});
+
 courseSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'instructors',
     select: '-__v -_id -passwordChangedAt'
+  }).populate({
+    path: 'reviews',
+    select: '-__v '
   });
+
   next();
 });
+
 const Course = mongoose.model("Course", courseSchema);
 
 module.exports = Course;

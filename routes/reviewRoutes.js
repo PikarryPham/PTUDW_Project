@@ -6,7 +6,7 @@ const router = express.Router({
 const AuthController = require('../controllers/authController')
 router
     .route('/')
-    .get(reviewController.getReviews)
+    .get(reviewController.getAllReviews)
     .post(
         AuthController.restrictTo('user'),
         reviewController.setCourseUserIds,

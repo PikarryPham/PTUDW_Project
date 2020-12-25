@@ -7,16 +7,19 @@ const handleDuplicateFieldsDB = (err, req) => {
     return new AppError(message, req.originalUrl);
 };
 const sendErrorDev = (err, res) => {
-    if (err.pathUrlErr.includes("/")) {
-        const viewsHBS = err.pathUrlErr.match(/[^\/]*$/)
-        res.render(viewsHBS[0], {
-            error: err.message
-        });
-        return;
-    }
-    res.render(err.pathUrlErr, {
+    // if (err.pathUrlErr.includes("/")) {
+    //     const viewsHBS = err.pathUrlErr.match(/[^\/]*$/)
+    //     res.render(viewsHBS[0], {
+    //         error: err.message
+    //     });
+    //     return;
+    // }
+    // res.render(err.pathUrlErr, {
+    //     error: err.message
+    // });
+    res.status(400).json({
         error: err.message
-    });
+    })
 };
 // const sendErrorProd = (err, res) => {
 //     if (err.pathUrlErr.includes("/")) {

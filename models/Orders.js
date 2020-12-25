@@ -7,7 +7,7 @@ const orderSchema = new mongoose.Schema({
         ref: 'User',
         required: [true, 'Review must belong to a User.']
     },
-    tour: {
+    course: {
         type: mongoose.Schema.ObjectId,
         ref: 'Course',
         required: [true, 'Review must belong to a course.']

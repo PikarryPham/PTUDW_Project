@@ -2,17 +2,18 @@ const catchAsync = require("../utils/catchAsync");
 const Course = require("../models/Course");
 const APIFeatures = require('../utils/apiFeatures');
 const User = require("../models/User");
+const Review = require("../models/Reviews");
+
 exports.getAllCourses = catchAsync(async (req, res, next) => {
+    console.log(req.query)
     let features;
     const user = await User.findById(req.signedCookies.jwt).lean();
     if (req.query.title) {
-        features = new APIFeatures(Course.find({
-            "title": {
-                $regex: req.query.title.toLowerCase()
-            }
-        }), req.query)
+        features = new APIFeatures(Course.find(), req.query).findByTitle().sort()
+    } else if (req.query.category) {
+        features = new APIFeatures(Course.find(), req.query).findByCategory()
     } else {
-        features = new APIFeatures(Course.find(req.query), req.query)
+        features = new APIFeatures(Course.find(), req.query)
     }
     const courses = await features.query.lean();
     //atCourse để chứung minh nó ở router course để render nav
@@ -21,18 +22,52 @@ exports.getAllCourses = catchAsync(async (req, res, next) => {
         courses,
         atCourse: true,
         user,
-    });
+    })
+
+
 })
 exports.getOneCourse = catchAsync(async (req, res, next) => {
 
     const {
         id
     } = req.params;
-    const user = req.signedCookies.jwt;
+    const user = await User.findById(req.signedCookies.jwt).lean();
     const course = await Course.findById(id).lean();
+    course.ratingsAverage = course.reviews.reduce((prev, acc) => prev += acc.rating, 0) / course.reviews.length || 0;
+    course.lengthReviews = course.reviews.length;
+    const reviews = await Review.aggregate([{
+            $match: {
+                course: course._id
+            },
+        },
+        {
+            $group: {
+                _id: {
+                    course: "$course",
+                    rating: "$rating"
+                },
+                count: {
+                    $sum: 1
+                }
+            }
+        },
+        {
+            $group: {
+                _id: "$_id.course",
+                counts: {
+                    $push: {
+                        rating: "$_id.rating",
+                        count: "$count"
+                    }
+                }
+
+            }
+        },
+    ])
 
     res.render('single-course', {
-        course,
         user,
+        reviews: reviews.length ? reviews[0].counts : [],
+        course,
     })
 })

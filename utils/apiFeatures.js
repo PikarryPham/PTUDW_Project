@@ -37,6 +37,7 @@ class APIFeatures {
             this.query = this.query.select(fields);
         } else {
             this.query = this.query.select('-__v');
+
         }
         return this;
     }
@@ -47,6 +48,22 @@ class APIFeatures {
         const skip = (page - 1) * limit;
         //limit=10&page=2
         this.query = this.query.skip(skip).limit(limit);
+        return this;
+    }
+    findByTitle() {
+        const title = this.queryString.title.toUpperCase();
+        this.query.find({
+            "title": {
+                $regex: title
+            }
+        })
+        return this;
+    }
+    findByCategory() {
+        const category = this.queryString.category;
+        this.query.find({
+            "category": category
+        })
         return this;
     }
 }

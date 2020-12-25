@@ -47,12 +47,10 @@
 									id="inputState" required
 									class="form-select">
 									<option value="-price">
-										Desc
-										Price
+										Increase
 									</option>
 									<option value="+price">
-										Asc
-										Price
+										Decrease
 									</option>
 								</select>
 							</div>
@@ -131,16 +129,21 @@
 					<div class="category-widget widget">
 						<h2>Product categories</h2>
 						<ul class="category-list">
-							<li><a href="#">Marketing</a>
+							<li><a
+									href="?category=Marketing">Marketing</a>
 							</li>
-							<li><a href="#">Information
+							<li><a href="?category=IT">Information
 									Technology</a>
 							</li>
-							<li><a href="#">Languages</a>
+							<li><a
+									href="?category=Languages">Languages</a>
 							</li>
-							<li><a href="#">Business</a>
+							<li><a
+									href="?category=Business">Business</a>
 							</li>
-							<li><a href="#">Design</a></li>
+							<li><a
+									href="?category=Design">Design</a>
+							</li>
 						</ul>
 					</div>
 
@@ -150,12 +153,12 @@
 							{{#each courses}}
 							<li>
 								<a
-									href="single-course.html"><img
+									href="/course?title={{this.title}}"><img
 										src="{{this.imageCover}}"
 										alt=""></a>
 								<div class="list-content">
 									<h3><a
-											href="single-course.html">{{this.title}}</a>
+											href="/course?title={{this.title}}">{{this.title}}</a>
 									</h3>
 									<span>${{this.price}}</span>
 								</div>

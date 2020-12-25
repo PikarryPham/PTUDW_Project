@@ -79,10 +79,9 @@ exports.index = async (req, res) => {
 }
 
 exports.getLogout = async (req, res) => {
+
     res.clearCookie("jwt");
-    res.redirect("/login", {
-        layout: false
-    });
+    res.redirect("/login");
 }
 exports.restrictTo = (...roles) => {
     return async (req, res, next) => {

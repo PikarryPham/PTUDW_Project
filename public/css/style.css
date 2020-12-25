@@ -719,6 +719,7 @@ a.button-one {
   padding: 10px 25px;
   border: 1px solid #4783f3;
   font-weight: 400;
+  margin-bottom: 10px;
   -webkit-border-radius: 24px;
   -moz-border-radius: 24px;
   -ms-border-radius: 24px;
@@ -1316,6 +1317,7 @@ section.courses-section .courses-top-bar form button {
 
 .course-post .course-content-main h2 a {
   color: #2f2f32;
+  text-transform: lowercase;
 }
 
 .course-post .course-content-main h2 a:hover {
@@ -2123,10 +2125,51 @@ section.testimonial-section .owl-buttons {
   margin-right: 6px;
 }
 
+.sidebar div.course-widget button.button-one {
+  margin-bottom: 26px;
+  width: 100%;
+  text-align: center;
+  color: #4783f3;
+  font-size: 15px;
+  padding: 10px 25px;
+  border: 1px solid #4783f3;
+  font-weight: 400;
+  -webkit-border-radius: 24px;
+  -moz-border-radius: 24px;
+  -ms-border-radius: 24px;
+  border-radius: 24px;
+  background: white;
+  transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.sidebar div.course-widget button.button-one:hover {
+  background: #4783f3;
+  color: #fff;
+  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 10px 16px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 10px 16px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0 10px 16px rgba(0, 0, 0, 0.1);
+
+}
+
 .sidebar div.course-widget a.button-one {
   margin-bottom: 26px;
   width: 100%;
   text-align: center;
+}
+
+.sidebar div.course-widget button.add-wish-list {
+  border: 1px solid #dc3545;
+  color: #dc3545;
+}
+
+.sidebar div.course-widget button.add-wish-list:hover {
+  background-color: #dc3545;
+
 }
 
 .sidebar div.course-widget h3 {
