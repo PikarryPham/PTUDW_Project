@@ -8,6 +8,7 @@ router
     .route('/')
     .get(reviewController.getAllReviews)
     .post(
+        AuthController.protect,
         AuthController.restrictTo('user'),
         reviewController.setCourseUserIds,
         reviewController.createReview

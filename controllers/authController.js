@@ -4,6 +4,9 @@ const User = require('../models/User');
 const Course = require("../models/Course");
 const APIFeatures = require("../utils/apiFeatures");
 
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
 const createdSendCookie = (user, res) => {
     const cookieOptions = {
         expires: new Date(
@@ -85,10 +88,9 @@ exports.getLogout = async (req, res) => {
 }
 exports.restrictTo = (...roles) => {
     return async (req, res, next) => {
-        const user = await User.findById(req.signedCookies.jwt);
         // roles ['admin', 'instructors']. role = 'user'
         //console.log(req.user);
-        if (!roles.includes(user.role)) {
+        if (!roles.includes(req.user.role)) {
             return next(
                 new AppError('You  do not have permission to perform this action', req.originalUrl)
             );
@@ -96,3 +98,123 @@ exports.restrictTo = (...roles) => {
         next();
     };
 };
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+    const user = await User.findById(req.user.id).select('+password');
+
+    // 2) Check if posted current password is correct
+    if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+        res.render('user-profile    ', {
+            err: `Password current or password don't' match.`
+        })
+        return;
+    }
+    // 3) If so, update password
+
+    user.password = req.body.password;
+    user.passwordConfirm = req.body.passwordConfirm;
+    await user.save();
+    // USER.findByIdAndUpdate will NOT work as intended !!
+
+    // 4) Log user in, send JWT
+    createdSendCookie(user, res);
+})
+
+exports.protect = catchAsync(async (req, res, next) => {
+    const user = await User.findById(req.signedCookies.jwt);
+    if (!user) {
+        res.render('login', {
+            err: 'You must login make access permission'
+        })
+        return;
+    }
+    req.user = user;
+    next();
+})
+
+exports.getForgotPassword = catchAsync(async (req, res, next) => {
+    res.render('forgot-password', {
+        layout: false
+    })
+})
+
+exports.postForgotPassword = catchAsync(async (req, res, next) => {
+    const user = await User.findOne({
+        email: req.body.email
+    });
+    if (!user) {
+        res.render('forgot-password', {
+            err: "There is no user with that email address"
+        })
+        return;
+    }
+    // 2) Generate random reset token
+    const resetToken = user.createPasswordResetToken();
+
+    // 3) Send it to user's email
+
+    const resetURL = `${req.protocol}://${req.get(
+    'host'
+  )}/user/resetPassword/${resetToken}`;
+    const message = `Forgot  your password ? Submit a PATCH request with your new password an passwordConfirm to ${resetURL} `;
+    const msg = {
+        to: req.body.email,
+        from: '	a36311@thanglong.edu.vn', // Use the email address or domain you verified above
+        subject: 'Your password reset token (valid for 10 min)',
+        text: message,
+        html: `<strong>${message}</strong>`,
+    };
+
+    try {
+        await sgMail.send(msg).then(() => {
+            res.render('forgot-password', {
+                layout: false,
+                notification: 'Send Verify at Your Email Check it now'
+            });
+        });
+        return;
+
+    } catch (err) {
+        user.passwordResetToken = undefined;
+        user.passwordResetExpires = undefined;
+        await user.save({
+            validateBeforeSave: false
+        });
+        // bug
+        res.send(err)
+
+    }
+})
+
+exports.getResetPassword = catchAsync(async (req, res, next) => {
+
+    res.render('reset-password', {
+        layout: false,
+        token: req.params.token
+    })
+})
+exports.postRestPassword = catchAsync(async (req, res, next) => {
+    const hashedToken = crypto
+        .createHash('sha256')
+        .update(req.params.token)
+        .digest('hex');
+    const user = await User.findOne({
+        passwordResetToken: hashedToken,
+        passwordResetExpires: {
+            $gt: Date.now()
+        }
+    });
+    if (!user) {
+        res.redirect('/forgotPassword')
+        // bug
+        return;
+
+    }
+    user.password = req.body.password;
+    user.passwordConfirm = req.body.passwordConfirm;
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save();
+    createdSendCookie(user, res)
+
+})
