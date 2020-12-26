@@ -2162,14 +2162,14 @@ section.testimonial-section .owl-buttons {
   text-align: center;
 }
 
-.sidebar div.course-widget button.add-wish-list {
+.sidebar div.course-widget a.add-wish-list {
   border: 1px solid #dc3545;
   color: #dc3545;
 }
 
-.sidebar div.course-widget button.add-wish-list:hover {
+.sidebar div.course-widget a.add-wish-list:hover {
   background-color: #dc3545;
-
+  color: white;
 }
 
 .sidebar div.course-widget h3 {

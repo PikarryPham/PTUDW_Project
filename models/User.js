@@ -54,6 +54,7 @@ const userSchema = new mongoose.Schema({
   wishCourse: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Course",
+    unique: true
   }]
 });
 userSchema.pre('save', async function (next) {

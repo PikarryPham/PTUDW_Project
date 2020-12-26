@@ -671,13 +671,24 @@
 							<span class="amount">
 								${{course.price}}</span>
 						</p>
+						{{#if (isAddWishList user course._id)}}
+
 						<a href="/course/{{course._id}}/orders"
 							class="button-one">Enroll
 							Now</a>
-						<button
+						{{else}}
+						<a href="/course/{{course._id}}/orders"
+							class="button-one">Enroll
+							Now</a>
+						<a href="/wish-list/{{course._id}}"
 							class="button-one add-wish-list">Add
 							Your
-							Love List</button>
+							Love List</a>
+						{{/if}}
+
+
+
+
 						<div class="product-meta-info-list">
 							<h3>Course Features</h3>
 							<div class="meta-info-unit">

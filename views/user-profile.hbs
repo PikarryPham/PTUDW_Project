@@ -313,7 +313,7 @@
             </a>
 
           </li>
-          {{#if  user.role.admin }}
+          {{#if (ifCondAdmin user.role )  }}
           <li>
             <a href="bookmark.html"
               class="ttr-material-button">

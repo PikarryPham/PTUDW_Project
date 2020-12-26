@@ -21,7 +21,7 @@ router
     .route('/register')
     .get(authController.getRegister)
     .post(authController.postRegister);
-
+router.route('/wish-list/:idCourse').get(authController.protect, userController.getAddWishList)
 router
     .route('/login')
     .get(authController.getLogin)

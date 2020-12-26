@@ -1,5 +1,6 @@
 const catchAsync = require("../utils/catchAsync")
 const User = require("../models/User")
+const Course = require("../models/Course")
 
 exports.getUserProfile = catchAsync(async (req, res, next) => {
     const user = await User.findById(req.user.id).lean()
@@ -39,3 +40,19 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     console.log(updateUser)
     res.redirect('/profile')
 });
+
+exports.getAddWishList = catchAsync(async (req, res, next) => {
+    const course = await Course.findById(req.params.idCourse);
+    if (!course) {
+        res.redirect('/course');
+        return;
+    }
+    await User.findByIdAndUpdate(req.user.id, {
+        $push: {
+            wishCourse: req.params.idCourse
+        }
+    }, {
+        runValidators: true
+    });
+    res.redirect('/course');
+})
