@@ -159,7 +159,7 @@ exports.postForgotPassword = catchAsync(async (req, res, next) => {
     const message = `Forgot  your password ? Submit a PATCH request with your new password an passwordConfirm to ${resetURL} `;
     const msg = {
         to: req.body.email,
-        from: '	a36311@thanglong.edu.vn', // Use the email address or domain you verified above
+        from: process.NODE_ENV.EMAIL_SEND_GIRD_DOMAIN, // Use the email address or domain you verified above
         subject: 'Your password reset token (valid for 10 min)',
         text: message,
         html: `<strong>${message}</strong>`,
