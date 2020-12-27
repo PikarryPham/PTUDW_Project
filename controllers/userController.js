@@ -58,5 +58,22 @@ exports.getAddWishList = catchAsync(async (req, res, next) => {
 })
 
 exports.getAllWishListByUser = catchAsync(async (req, res, next) => {
-    // res.render('')
+    const user = await User.findById(req.user.id).populate('wishCourse', 'title _id ').lean();
+    res.render('wish-list', {
+        layout: false,
+        user,
+    })
+})
+exports.deleteOneWishList = catchAsync(async (req, res, next) => {
+    const {
+        idCourse
+    } = req.params;
+    await User.findByIdAndUpdate(req.user.id, {
+        $pull: {
+            wishCourse: idCourse
+        }
+    }, {
+        new: true,
+    })
+    res.redirect('/profile')
 })

@@ -57,6 +57,12 @@ const userSchema = new mongoose.Schema({
     unique: true
   }]
 });
+// userSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: 'wishCourse',
+//   });
+//   next();
+// });
 userSchema.pre('save', async function (next) {
   // ONLY run this function if password was actually modified
   if (!this.isModified('password')) return next();

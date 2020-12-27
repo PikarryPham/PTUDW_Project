@@ -1,0 +1,35 @@
+{{#> user-profile-layout}}
+{{> title-user titleName='Wish List'}}
+<div class="row">
+    {{#if user.wishCourse.length}}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Name Course</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {{#each user.wishCourse}}
+            <tr>
+                <th scope="row">{{@index }}:</th>
+                <td>{{this.title}}</td>
+                <td><a class="btn btn-outline-danger"
+                        role="button"
+                        href="/user/wish-list/{{this._id}}/delete">Delete
+                        Wish List</a>
+                </td>
+
+            </tr>
+            {{/each}}
+
+        </tbody>
+    </table>
+    {{else}}
+    <h2>No course your Wish-List</h2>
+    {{/if}}
+</div>
+{{/user-profile-layout}}

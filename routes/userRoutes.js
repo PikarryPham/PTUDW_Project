@@ -22,6 +22,9 @@ router
     .get(authController.getRegister)
     .post(authController.postRegister);
 router.route('/wish-list/:idCourse').get(authController.protect, userController.getAddWishList)
+router.use('/user/wish-list', authController.protect)
+router.route('/user/wish-list').get(userController.getAllWishListByUser)
+router.route('/user/wish-list/:idCourse/delete').get(authController.protect, userController.deleteOneWishList)
 router
     .route('/login')
     .get(authController.getLogin)
