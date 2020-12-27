@@ -49,10 +49,14 @@ exports.getAddWishList = catchAsync(async (req, res, next) => {
     }
     await User.findByIdAndUpdate(req.user.id, {
         $push: {
-            wishCourse: req.params.idCourse
+            wishCourse: course._id
         }
     }, {
         runValidators: true
     });
     res.redirect('/course');
+})
+
+exports.getAllWishListByUser = catchAsync(async (req, res, next) => {
+    // res.render('')
 })

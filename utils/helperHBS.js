@@ -10,8 +10,6 @@ module.exports = {
         return ['admin'].includes(role)
     },
     isAddWishList(user, idCourse) {
-
         return user && user.wishCourse.find(el => el.toString() === idCourse.toString())
-
     }
 }

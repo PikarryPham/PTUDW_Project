@@ -1,0 +1,94 @@
+<div class="ttr-sidebar">
+    <div class="ttr-sidebar-wrapper content-scroll">
+        <!-- side menu logo start -->
+        <div class="ttr-sidebar-logo">
+            <!-- <div class="ttr-sidebar-pin-button" title="Pin/Unpin Menu">
+					<i class="material-icons ttr-fixed-icon">gps_fixed</i>
+					<i class="material-icons ttr-not-fixed-icon">gps_not_fixed</i>
+				</div> -->
+            <div class="ttr-sidebar-toggle-button">
+                <i class="ti-arrow-left"></i>
+            </div>
+        </div>
+        <!-- side menu logo end -->
+        <!-- sidebar menu start -->
+        <nav class="ttr-sidebar-navi">
+            <ul>
+                <li>
+                    <a href="index.html"
+                        class="ttr-material-button">
+                        <span class="ttr-icon"><i
+                                class="ti-home"></i></span>
+                        <span
+                            class="ttr-label">Dashborad</span>
+                    </a>
+                </li>
+                {{#if (ifCondAdminInstructor user.role)}}
+                <li>
+                    <a href="courses.html"
+                        class="ttr-material-button">
+                        <span class="ttr-icon"><i
+                                class="ti-book"></i></span>
+
+                        <span class="ttr-label">Your
+                            Course</span>
+
+
+                    </a>
+                </li>
+                <li>
+                    <a href="add-listing.html"
+                        class="ttr-material-button">
+                        <span class="ttr-icon"><i
+                                class="ti-layout-accordion-list"></i></span>
+                        <span class="ttr-label">Add
+                            Course</span>
+                    </a>
+                </li>
+                {{else}}
+                {{/if}}
+
+                <li>
+                    <a href="#" class="ttr-material-button">
+                        <span class="ttr-icon"><i
+                                class="ti-calendar"></i></span>
+                        <span class="ttr-label">Your
+                            Wish List
+                            Course</span>
+                    </a>
+
+                </li>
+                {{#if (ifCondAdmin user.role )  }}
+                <li>
+                    <a href="bookmark.html"
+                        class="ttr-material-button">
+                        <span class="ttr-icon"><i
+                                class="ti-bookmark-alt"></i></span>
+                        <span class="ttr-label">All
+                            Course</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="bookmark.html"
+                        class="ttr-material-button">
+                        <span class="ttr-icon"><i
+                                class="ti-bookmark-alt"></i></span>
+                        <span class="ttr-label">All
+                            User</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="teacher-profile.html"
+                        class="ttr-material-button"><span
+                            class="ttr-label">All
+                            Teacher</span></a>
+                </li>
+                {{else}}
+                {{/if}}
+                <li class="ttr-seperate"></li>
+            </ul>
+            <!-- sidebar menu end -->
+        </nav>
+        <!-- sidebar menu end -->
+    </div>
+</div>
