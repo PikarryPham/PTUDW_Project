@@ -73,38 +73,7 @@
 
 					<!-- single course content -->
 					<div class="single-course-content">
-						<h2>What Will I Learn?</h2>
-						{{#each course.whatUserLearn}}
-						<p>{{this}}</p>
-						{{/each}}
-						<h2>Learning Objectives</h2>
-						<div class="row">
-							<div class="col-md-6">
-								<ul class="list">
-									{{#each course.learningObjectives}}
-									<li>{{this}}</li>
-									{{/each}}
-
-								</ul>
-							</div>
-							<div class="col-md-6">
-								<ul class="list">
-									<li>Nullam
-										condimentum
-										metus quis magna
-										egestas</li>
-									<li>Mauris lobortis
-										metus in
-										pharetra posuere
-									</li>
-									<li>Suspendisse sed
-										est luctus nibh
-										tempor</li>
-								</ul>
-							</div>
-						</div>
-						<h2>Prior Knowledge</h2>
-						<p>{{course.priorKnowledge:}}</p>
+						{{{course.textDescription}}}
 
 						<!-- course section -->
 						<div class="course-section">

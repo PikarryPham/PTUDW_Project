@@ -77,3 +77,22 @@ exports.deleteOneWishList = catchAsync(async (req, res, next) => {
     })
     res.redirect('/profile')
 })
+
+exports.getAllCourseInstructors = catchAsync(async (req, res, next) => {
+    const courses = await Course.find({
+        instructors: req.user.id
+    }).lean();
+    const user = await User.findById(req.user.id).lean()
+    res.render('user-list-course', {
+        courses,
+        user,
+        layout: false
+    })
+})
+exports.addCourses = catchAsync(async (req, res, next) => {
+    const user = await User.findById(req.user.id).lean()
+    res.render('user-add-course', {
+        user,
+        layout: false
+    })
+})

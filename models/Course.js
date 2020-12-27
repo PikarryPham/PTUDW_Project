@@ -22,7 +22,7 @@ const courseSchema = new mongoose.Schema({
   },
   duration: {
     type: Number,
-    required: [true, 'A course must have a duration']
+
   },
   enrolled: {
     type: Number,
@@ -57,38 +57,17 @@ const courseSchema = new mongoose.Schema({
   createAt: {
     type: Date,
     default: Date.now(),
-    select: false
   },
   description: {
     type: String,
     maxlength: [1000, 'A course description must have less or equal then 1000 characters'],
     minlength: [5, 'A course description must have more or equal then 5 characters']
   },
-  whatUserLearn: [{
+  textDescription: {
     type: String,
-    maxlength: [1000, 'A course description must have less or equal then 1000 characters'],
-    minlength: [5, 'A course description must have more or equal then 5 characters']
-  }],
-  learningObjectives: [{
-    type: String,
-    maxlength: [1000, 'A course description must have less or equal then 1000 characters'],
-    minlength: [5, 'A course description must have more or equal then 5 characters']
-  }],
-  priorKnowledge: {
-    type: String,
-    maxlength: [1000, 'A course description must have less or equal then 1000 characters'],
-    minlength: [5, 'A course description must have more or equal then 5 characters']
+    required: [true, 'A course must have text Description']
   },
-  createAt: {
-    type: Date,
-    required: true,
-    default: Date.now(),
-  },
-  postDate: {
-    type: Date,
-    required: true,
-    default: Date.now(),
-  },
+
 }, {
   toJSON: {
     virtuals: true

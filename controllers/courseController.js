@@ -71,3 +71,15 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
         course,
     })
 })
+
+exports.deleteOneCourses = catchAsync(async (req, res, next) => {
+
+})
+
+exports.addOneCourse = catchAsync(async (req, res, next) => {
+    req.body.instructors = req.user.id
+    req.body.imageCover = req.file.path.split('/').slice(1).join('/');
+    await Course.create(req.body)
+    console.log(req.body)
+    res.redirect('/profile')
+})

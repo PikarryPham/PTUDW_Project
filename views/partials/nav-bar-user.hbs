@@ -25,19 +25,17 @@
                 </li>
                 {{#if (ifCondAdminInstructor user.role)}}
                 <li>
-                    <a href="courses.html"
+                    <a href="/user/courses"
                         class="ttr-material-button">
                         <span class="ttr-icon"><i
                                 class="ti-book"></i></span>
 
                         <span class="ttr-label">Your
                             Course</span>
-
-
                     </a>
                 </li>
                 <li>
-                    <a href="add-listing.html"
+                    <a href="/user/add-course"
                         class="ttr-material-button">
                         <span class="ttr-icon"><i
                                 class="ti-layout-accordion-list"></i></span>
@@ -47,7 +45,6 @@
                 </li>
                 {{else}}
                 {{/if}}
-
                 <li>
                     <a href="/user/wish-list"
                         class="ttr-material-button">

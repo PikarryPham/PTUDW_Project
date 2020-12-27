@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({
 
 }))
 
-//const fs = require('fs');
+// const fs = require('fs');
 // const Course = require('./models/Course');
 
 // async function runHere() {
@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({
 //     a.save()
 // }
 
-//runHere()
+// //runHere()
 // const a = JSON.parse(fs.readFileSync('./data.json', {
 //     encoding: 'utf-8'
 // }))
