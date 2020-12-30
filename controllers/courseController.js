@@ -1,11 +1,16 @@
 const catchAsync = require("../utils/catchAsync");
-const Course = require("../models/Course");
+
 const APIFeatures = require('../utils/apiFeatures');
-const User = require("../models/User");
-const Review = require("../models/Reviews");
+const {
+    Course,
+    User,
+    Review
+} = require('../models/index')
+
 
 exports.getAllCourses = catchAsync(async (req, res, next) => {
-    console.log(req.query)
+
+
     let features;
     const user = await User.findById(req.signedCookies.jwt).lean();
     if (req.query.title) {

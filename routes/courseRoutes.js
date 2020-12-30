@@ -1,15 +1,21 @@
 const express = require('express');
-const courseController = require('../controllers/courseController');
-const reviewRouter = require('./reviewRoutes');
+const {
+    courseController,
+    authController
+} = require('../controllers/index');
+const {
+    reviewRoutes,
+    // orderRoutes
+} = require('./index')
+// const reviewRoutes = require('./reviewRoutes')
 const multer = require('multer');
 const upload = multer({
     dest: './public/uploads/'
 })
-const orderRouter = require('./orderRoutes');
-const authController = require('../controllers/authController');
+
 const router = express.Router();
-router.use('/:courseId/orders', authController.protect, orderRouter)
-router.use('/:courseId/reviews', reviewRouter);
+// router.use('/:courseId/orders', authController.protect, )
+router.use('/:courseId/reviews', reviewRoutes);
 
 router.route("/")
     .get(courseController.getAllCourses)

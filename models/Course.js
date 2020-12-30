@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const schemaOptions = require("./configModel");
 
 const courseSchema = new mongoose.Schema({
   category: {
@@ -68,14 +69,7 @@ const courseSchema = new mongoose.Schema({
     required: [true, 'A course must have text Description']
   },
 
-}, {
-  toJSON: {
-    virtuals: true
-  },
-  toObject: {
-    virtuals: true
-  }
-});
+}, schemaOptions);
 courseSchema.virtual('reviews', {
   ref: 'Review',
   foreignField: 'course',

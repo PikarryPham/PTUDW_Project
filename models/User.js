@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
+const schemaOptions = require("./configModel");
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -55,7 +56,7 @@ const userSchema = new mongoose.Schema({
     ref: "Course",
     unique: true
   }]
-});
+}, schemaOptions);
 // userSchema.pre(/^find/, function (next) {
 //   this.populate({
 //     path: 'wishCourse',

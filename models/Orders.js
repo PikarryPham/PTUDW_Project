@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const schemaOptions = require('./configModel');
 // Orders // rating // createdAt // ref to course // ref to user
 
 const orderSchema = new mongoose.Schema({
@@ -21,14 +22,7 @@ const orderSchema = new mongoose.Schema({
         required: true,
         min: [1, 'Price must greater or equal than 1']
     }
-}, {
-    toJSON: {
-        virtuals: true
-    },
-    toObject: {
-        virtuals: true
-    }
-})
+}, schemaOptions)
 
 const Orders = mongoose.model('Orders', orderSchema);
 

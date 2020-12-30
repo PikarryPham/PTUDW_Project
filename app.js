@@ -3,9 +3,11 @@ const exphbs = require("express-handlebars");
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const app = express();
+const {
+    courseRoutes,
+    userRoutes
+} = require('./routes/index');
 
-const courseRouter = require('./routes/courseRoutes');
-const userRouter = require('./routes/userRoutes');
 const globalError = require('./controllers/errorController');
 const helperHBS = require('./utils/helperHBS');
 app.use(bodyParser.urlencoded({
@@ -45,9 +47,9 @@ app.engine("hbs", exphbs({
 }));
 app.set("view engine", "hbs");
 app.use(express.static(`${__dirname}/public/`));
-app.use('/', userRouter)
+app.use('/', userRoutes)
 
-app.use('/course', courseRouter)
+app.use('/course', courseRoutes)
 app.use(globalError)
 
 module.exports = app;

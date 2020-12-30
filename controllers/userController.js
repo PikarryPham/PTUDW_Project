@@ -1,7 +1,9 @@
 const catchAsync = require("../utils/catchAsync")
-const User = require("../models/User")
-const Course = require("../models/Course")
 
+const {
+    User,
+    Course
+} = require("../models/index")
 exports.getUserProfile = catchAsync(async (req, res, next) => {
     const user = await User.findById(req.user.id).lean()
     res.render('user-profile', {
@@ -37,7 +39,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
         new: true,
         runValidators: true
     }).lean();
-    console.log(updateUser)
+
     res.redirect('/profile')
 });
 
@@ -83,7 +85,7 @@ exports.getAllCourseInstructors = catchAsync(async (req, res, next) => {
         instructors: req.user.id
     }).lean();
     const user = await User.findById(req.user.id).lean()
-    res.render('user-list-course', {
+    res.render('instructors&admin/list-course', {
         courses,
         user,
         layout: false
@@ -91,7 +93,7 @@ exports.getAllCourseInstructors = catchAsync(async (req, res, next) => {
 })
 exports.addCourses = catchAsync(async (req, res, next) => {
     const user = await User.findById(req.user.id).lean()
-    res.render('user-add-course', {
+    res.render('instructors&admin/add-course', {
         user,
         layout: false
     })

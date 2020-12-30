@@ -1,7 +1,10 @@
 const catchAsync = require("../utils/catchAsync");
 //const AppError = require('../utils/appError');
-const User = require('../models/User');
-const Course = require("../models/Course");
+
+const {
+    User,
+    Course
+} = require('../models/index');
 const APIFeatures = require("../utils/apiFeatures");
 
 const sgMail = require('@sendgrid/mail');

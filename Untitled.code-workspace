@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../Center/Learn/NodeJs/Udemy-Jonas-learn"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "PTUDW_Project"
+	}
+}

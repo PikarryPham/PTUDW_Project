@@ -1,6 +1,7 @@
 // Review // rating // createdAt // ref to course // ref to user
 
 const mongoose = require('mongoose');
+const schemaOptions = require('./configModel');
 
 const reviewSchema = new mongoose.Schema({
   review: {
@@ -27,14 +28,7 @@ const reviewSchema = new mongoose.Schema({
     ref: 'Course',
     required: [true, 'Review must belong to a course.']
   }
-}, {
-  toJSON: {
-    virtuals: true
-  },
-  toObject: {
-    virtuals: true
-  }
-});
+}, schemaOptions);
 
 reviewSchema.pre(/^find/, function (next) {
   this.populate({

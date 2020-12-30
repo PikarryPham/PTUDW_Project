@@ -1,6 +1,7 @@
-const User = require("../models/User");
-const Course = require("../models/Course");
-
+const {
+    User,
+    Course
+} = require('../models/index')
 exports.indexOrder = async (req, res, next) => {
 
     const user = await User.findById(req.signedCookies.jwt).lean();
