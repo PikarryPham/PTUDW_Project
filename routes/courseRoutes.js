@@ -1,12 +1,9 @@
 const express = require('express');
-const {
-    courseController,
-    authController
-} = require('../controllers/index');
-const {
-    reviewRoutes,
-    // orderRoutes
-} = require('./index')
+const courseController = require('../controllers/courseController');
+const authController = require('../controllers/authController');
+
+const reviewRoutes = require('./reviewRoutes');
+
 // const reviewRoutes = require('./reviewRoutes')
 const multer = require('multer');
 const upload = multer({

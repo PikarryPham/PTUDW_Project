@@ -3,10 +3,9 @@ const express = require('express');
 const router = express.Router({
     mergeParams: true
 });
-const {
-    authController,
-    reviewController
-} = require('../controllers/index')
+const authController = require('../controllers/authController');
+const reviewController = require('../controllers/reviewController');
+
 router
     .route('/')
     .get(reviewController.getAllReviews)

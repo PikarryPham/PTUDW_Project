@@ -3,6 +3,10 @@ const router = express.Router({
     mergeParams: true
 });
 const videoController = require('../controllers/videoController')
-const AuthController = require('../controllers/authController')
-router.use(AuthController.protect, AuthController.restrictTo('admin', 'instructors'));
-router.get('/', videoController.indexGetVideo)
+const authController = require('../controllers/authController')
+
+
+router.use(authController.protect, authController.restrictTo('admin', 'instructors'));
+router.get('/', videoController.indexGetVideo);
+
+module.exports = router;

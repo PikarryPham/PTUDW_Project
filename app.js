@@ -3,11 +3,9 @@ const exphbs = require("express-handlebars");
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const app = express();
-const {
-    courseRoutes,
-    userRoutes
-} = require('./routes/index');
 
+const courseRoutes = require('./routes/courseRoutes');
+const userRoutes = require('./routes/userRoutes');
 const globalError = require('./controllers/errorController');
 const helperHBS = require('./utils/helperHBS');
 app.use(bodyParser.urlencoded({

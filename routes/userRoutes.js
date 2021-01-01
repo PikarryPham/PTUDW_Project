@@ -1,9 +1,14 @@
 const express = require('express');
-const {
-    authController,
-    userController
-} = require('../controllers/index');
+const authController = require('../controllers/authController')
+const userController = require('../controllers/userController')
+
+
+const videoRoutes = require('./videoRoutes')
+
 const router = express.Router();
+router.use('/user/add-video', videoRoutes)
+
+
 router.get('/', authController.index)
 router.get('/logout', authController.getLogout);
 
