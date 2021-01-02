@@ -11,6 +11,11 @@ const lessonSchema = new mongoose.Schema({
         required: [true, 'Video must have a title']
     },
 }, schemaOptions)
+lessonSchema.virtual('videos', {
+    ref: 'Video',
+    foreignField: 'idLesson',
+    localField: '_id'
+})
 
 const Lesson = mongoose.model('Lesson', lessonSchema)
 

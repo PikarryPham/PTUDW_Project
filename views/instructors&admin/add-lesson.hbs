@@ -1,0 +1,77 @@
+{{#> user-profile-layout}}
+{{> title-user titleName='Add Lesson Course'}}
+<div class="row">
+    <div class="col-lg-12 m-b30">
+        <div class="widget-box">
+            <div class="wc-title">
+                <h4>Add Lesson Course</h4>
+            </div>
+            <div class="widget-inner mb-5">
+                <form class="edit-profile m-b30"
+                    action="/instructor/course/{{idCourse}}/lesson"
+                    method="POST">
+                    <div class="">
+
+                        <div class="form-group row">
+                            <label
+                                class="col-sm-2 col-form-label">Lesson
+                                Name</label>
+                            <div class="col-sm-7">
+                                <input class="form-control"
+                                    name="titleLesson"
+                                    required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                </div>
+                                <div class="col-sm-7">
+                                    <button type="submit"
+                                        class="btn">Add
+                                        Lesson</button>
+                                    <button type="reset"
+                                        class="btn btn-danger">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            {{#if lessons.length}}
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Lesson Name</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each lessons}}
+                    <tr>
+                        <th scope="row">{{@index}}</th>
+                        <td>{{this.titleLesson}}</td>
+                        <td><a href="#">Edit Lesson</a></td>
+                        <td><a href="#">Delete Lesson</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+
+                </tbody>
+            </table>
+            {{else }}
+            <h2 class="text-center">You do not have lessons
+            </h2>
+            {{/if}}
+        </div>
+    </div>
+</div>
+
+{{/user-profile-layout}}

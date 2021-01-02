@@ -12,10 +12,17 @@ const upload = multer({
 
 const router = express.Router();
 // router.use('/:courseId/orders', authController.protect, )
+
+
 router.use('/:courseId/reviews', reviewRoutes);
 
 router.route("/")
     .get(courseController.getAllCourses)
     .post(upload.single('imageCover'), authController.protect, authController.restrictTo('instructors', 'admin'), courseController.addOneCourse)
+
+router.route('/user')
+    .get(authController.protect, authController.restrictTo('instructors', 'admin'), courseController.getAllCourseInstructors)
+// MAKE FOR ID
 router.get("/:id/", courseController.getOneCourse)
+
 module.exports = router;

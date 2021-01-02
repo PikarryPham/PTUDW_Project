@@ -16,7 +16,8 @@ const videoSchema = new mongoose.Schema({
     },
     isLooked: {
         type: Boolean,
-        required: ['Can video not for student watch']
+        required: ['Can video not for student watch'],
+        default: false
     }
 }, mongooseOptions)
 

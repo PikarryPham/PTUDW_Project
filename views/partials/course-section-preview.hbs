@@ -1,0 +1,27 @@
+<div class="course-section">
+    <h3>{{lesson.titleLesson}} </h3>
+    <div class="panel-group">
+        <div class="course-panel-heading">
+            <div class="panel-heading-left">
+                {{#if lesson.videos.length}}
+                {{#each lesson.videos}}
+                <div class="course-lesson-icon">
+                    {{>model-play-video data = this }}
+                </div>
+                <div class="title">
+                    <h4>1.1
+                        {{this.titleVideo}}
+                        <span
+                            class="badge-item video">video</span>
+                    </h4>
+                </div>
+                {{/each}}
+                {{else}}
+                {{/if}}
+            </div>
+            <div class="panel-heading-right">
+
+            </div>
+        </div>
+    </div>
+</div>

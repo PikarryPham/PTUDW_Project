@@ -1,0 +1,103 @@
+{{#> user-profile-layout}}
+{{> title-user titleName='Add Video Course'}}
+<div class="row">
+    <div class="col-lg-12 m-b30">
+        <div class="widget-box">
+            <div class="wc-title">
+                <h4>Add Video Course</h4>
+            </div>
+            <div class="widget-inner mb-5">
+                <form class="edit-profile m-b30"
+                    action="/instructor/course/{{idCourse}}/video"
+                    method="POST"
+                    enctype="multipart/form-data">
+                    <div class="">
+                        <div class="form-group row">
+                            <label
+                                class="col-sm-2 col-form-label">Title
+                                video
+                            </label>
+                            <div class="col-sm-7">
+                                <input class="form-control"
+                                    name="titleVideo"
+                                    required />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="">
+                        <div class="form-group row">
+                            <label
+                                class="col-sm-2 col-form-label">Lessons
+                            </label>
+                            <div class="col-sm-7">
+                                <select name="idLesson"
+                                    required
+                                    class="form-control">
+                                    {{#each lessons}}
+                                    <option
+                                        value="{{this._id}}">
+                                        {{this.titleLesson}}
+                                    </option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="form-group row">
+                            <label
+                                class="col-sm-2 col-form-label">Video
+                                Upload:
+                            </label>
+                            <div class="col-sm-7">
+                                <input type="file"
+                                    class="form-control"
+                                    name="pathUrl"
+                                    required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="form-group row">
+                            <label
+                                class="col-sm-2 col-form-label">Watched:
+                            </label>
+                            <div class="col-sm-7">
+                                <select name="isLooked"
+                                    required
+                                    class="form-control">
+                                    <option value="true">
+                                        Yes</option>
+                                    <option value="no">
+                                        No
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                </div>
+                                <div class="col-sm-7">
+                                    <button type="submit"
+                                        class="btn">Add
+                                        Video To
+                                        Lesson</button>
+                                    <button type="reset"
+                                        class="btn btn-danger">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/user-profile-layout}}

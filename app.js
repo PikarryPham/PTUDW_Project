@@ -6,6 +6,9 @@ const app = express();
 
 const courseRoutes = require('./routes/courseRoutes');
 const userRoutes = require('./routes/userRoutes');
+const instructorRoutes = require('./routes/instructorRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+
 const globalError = require('./controllers/errorController');
 const helperHBS = require('./utils/helperHBS');
 app.use(bodyParser.urlencoded({
@@ -46,7 +49,8 @@ app.engine("hbs", exphbs({
 app.set("view engine", "hbs");
 app.use(express.static(`${__dirname}/public/`));
 app.use('/', userRoutes)
-
+app.use('/instructor', instructorRoutes)
+app.use('/admin', adminRoutes)
 app.use('/course', courseRoutes)
 app.use(globalError)
 

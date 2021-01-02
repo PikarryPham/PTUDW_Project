@@ -4,8 +4,12 @@ const APIFeatures = require('../utils/apiFeatures');
 const {
     Course,
     User,
-    Review
-} = require('../models/index')
+    Review,
+    Video,
+    Lesson
+} = require('../models/index');
+
+
 
 
 exports.getAllCourses = catchAsync(async (req, res, next) => {
@@ -40,6 +44,13 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
     const course = await Course.findById(id).lean();
     course.ratingsAverage = course.reviews.reduce((prev, acc) => prev += acc.rating, 0) / course.reviews.length || 0;
     course.lengthReviews = course.reviews.length;
+    const lessons = await Lesson.find({
+        idCourse: id
+    }).populate({
+        path: 'videos',
+        select: '-created_at -updated_at -__v '
+    }).lean()
+
     const reviews = await Review.aggregate([{
             $match: {
                 course: course._id
@@ -69,11 +80,12 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
             }
         },
     ])
-
+    console.log(lessons)
     res.render('single-course', {
         user,
         reviews: reviews.length ? reviews[0].counts : [],
         course,
+        lessons
     })
 })
 
@@ -85,6 +97,19 @@ exports.addOneCourse = catchAsync(async (req, res, next) => {
     req.body.instructors = req.user.id
     req.body.imageCover = req.file.path.split('/').slice(1).join('/');
     await Course.create(req.body)
-    console.log(req.body)
+
     res.redirect('/profile')
+})
+
+exports.getAllCourseInstructors = catchAsync(async (req, res, next) => {
+
+    const courses = await Course.find({
+        instructors: req.user.id
+    }).lean();
+    const user = await User.findById(req.user.id).lean()
+    res.render('instructors&admin/list-course', {
+        courses,
+        user,
+        layout: false
+    })
 })

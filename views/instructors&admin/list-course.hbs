@@ -2,42 +2,38 @@
 {{> title-user titleName='List Course'}}
 <div class="row">
     {{#if courses.length}}
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">STT</th>
-                <th scope="col">Title Course</th>
-                <th scope="col">Image Course</th>
-                <th scope="col">Price Course</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Delete</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
+    <div class="container">
+        <div class="row">
             {{#each courses}}
-            <tr>
-                <th scope="row">{{@index }}:</th>
-                <td>{{this.title}}</td>
-                <td><img src="{{this.imageCover}}"
-                        width="150px" height="100px" alt="#"
-                        class="img-responsive">
-                </td>
-                <td>{{this.price}}</td>
-                {{!-- href="/instructor/course/{{this._id}}/post" --}}
-                <td><button class="btn btn-outline-danger"
-                        data-toggle="modal"
-                        data-target="#exampleModal">Edit</button>
-                </td>
-                <td><a class="btn btn-outline-danger"
-                        href="/instructor/course/{{this._id}}/delete">Delete</a>
-                </td>
-            </tr>
+            <div
+                class="col-sm-2 col-md-4 col-lg-3 mr-4 mb-5">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top"
+                        src="{{this.imageCover}}"
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {{this.title}}</h5>
+                        <a href="/instructor/course/{{this._id}}"
+                            class="btn btn-primary mr-2 mb-3">Edit
+                            Course</a>
+                        <a href="/instructor/course/{{this._id}}/video"
+                            class="btn btn-primary mr-2 mb-3">Add
+                            Video</a>
+                        <a href="/instructor/course/{{this._id}}/lesson"
+                            class="btn btn-primary mr-2 mb-3">Add
+                            Lesson</a>
+                        <a href="/instructor/course/{{this._id}}/delete"
+                            class="btn btn-primary mr-2 mb-3">Del
+                            Course</a>
+                    </div>
+                </div>
+            </div>
+
             {{/each}}
 
-        </tbody>
-    </table>
+        </div>
+    </div>
     <div class="modal fade" id="exampleModal" tabindex="-1"
         role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">

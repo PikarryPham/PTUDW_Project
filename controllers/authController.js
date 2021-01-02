@@ -1,5 +1,5 @@
 const catchAsync = require("../utils/catchAsync");
-//const AppError = require('../utils/appError');
+const AppError = require('../utils/appError');
 
 const {
     User,
@@ -91,13 +91,12 @@ exports.getLogout = async (req, res) => {
 }
 exports.restrictTo = (...roles) => {
     return async (req, res, next) => {
-        // roles ['admin', 'instructors']. role = 'user'
-        //console.log(req.user);
         if (!roles.includes(req.user.role)) {
             return next(
                 new AppError('You  do not have permission to perform this action', req.originalUrl)
             );
         }
+        console.log('restrict To is running !')
         next();
     };
 };
@@ -124,7 +123,9 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 })
 
 exports.protect = catchAsync(async (req, res, next) => {
+
     const user = await User.findById(req.signedCookies.jwt);
+
     if (!user) {
         res.render('login', {
             err: 'You must login make access permission'
@@ -132,6 +133,7 @@ exports.protect = catchAsync(async (req, res, next) => {
         return;
     }
     req.user = user;
+    console.log('protect running')
     next();
 })
 
