@@ -1,27 +1,28 @@
 <div class="course-section">
     <h3>{{lesson.titleLesson}} </h3>
     <div class="panel-group">
+        {{#if lesson.videos.length}}
+        {{#each lesson.videos}}
         <div class="course-panel-heading">
             <div class="panel-heading-left">
-                {{#if lesson.videos.length}}
-                {{#each lesson.videos}}
                 <div class="course-lesson-icon">
-                    {{>model-play-video data = this }}
+                    <i class="fa fa-play-circle-o"></i>
                 </div>
                 <div class="title">
-                    <h4>1.1
+                    <h4>{{@index}} :
                         {{this.titleVideo}}
                         <span
                             class="badge-item video">video</span>
                     </h4>
                 </div>
-                {{/each}}
-                {{else}}
-                {{/if}}
             </div>
             <div class="panel-heading-right">
-
+                {{>model-play-video data = this }}
             </div>
         </div>
+        {{/each}}
+        {{else}}
+
+        {{/if}}
     </div>
 </div>

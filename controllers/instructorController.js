@@ -72,7 +72,7 @@ exports.postAddLesson = catchAsync(async (req, res, next) => {
     }
     req.body.idCourse = idCourse
     await Lesson.create(req.body);
-    res.redirect('/profile')
+    res.redirect(`/instructor/course/${idCourse}/video`)
 })
 
 

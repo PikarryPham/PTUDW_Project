@@ -1,7 +1,7 @@
 const express = require('express');
 const courseController = require('../controllers/courseController');
 const authController = require('../controllers/authController');
-
+const orderRoutes = require('./orderRoutes');
 const reviewRoutes = require('./reviewRoutes');
 
 // const reviewRoutes = require('./reviewRoutes')
@@ -11,7 +11,7 @@ const upload = multer({
 })
 
 const router = express.Router();
-// router.use('/:courseId/orders', authController.protect, )
+router.use('/:courseId/orders', orderRoutes)
 
 
 router.use('/:courseId/reviews', reviewRoutes);

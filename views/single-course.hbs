@@ -47,7 +47,8 @@
 									<span
 										class="label">Category</span>
 									<div class="value">
-										<a href="#">{{course.category}}
+										<a
+											href="#">{{course.category}}</a>
 
 									</div>
 								</div>
@@ -76,9 +77,11 @@
 						{{{course.textDescription}}}
 
 						<!-- course section -->
+
 						{{#each lessons}}
 						{{>course-section-preview lesson = this}}
 						{{/each}}
+
 						<!-- end course section -->
 
 						<!-- course section -->
@@ -214,10 +217,14 @@
 								${{course.price}}</span>
 						</p>
 						{{#if (isAddWishList user course._id)}}
-
+						{{#if isEnrolled}}
+						<a href="/course/{{course._id}}/orders"
+							class="button-one">Learn Now</a>
+						{{else}}
 						<a href="/course/{{course._id}}/orders"
 							class="button-one">Enroll
 							Now</a>
+						{{/if}}
 						{{else}}
 						<a href="/course/{{course._id}}/orders"
 							class="button-one">Enroll

@@ -6,8 +6,10 @@ const {
     User,
     Review,
     Video,
-    Lesson
+    Lesson,
+    Orders
 } = require('../models/index');
+
 
 
 
@@ -44,6 +46,10 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
     const course = await Course.findById(id).lean();
     course.ratingsAverage = course.reviews.reduce((prev, acc) => prev += acc.rating, 0) / course.reviews.length || 0;
     course.lengthReviews = course.reviews.length;
+    const isEnrolled = await Orders.findOne({
+        user: req.signedCookies.jwt,
+        course: id
+    }).lean();
     const lessons = await Lesson.find({
         idCourse: id
     }).populate({
@@ -85,7 +91,8 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
         user,
         reviews: reviews.length ? reviews[0].counts : [],
         course,
-        lessons
+        lessons,
+        isEnrolled
     })
 })
 
@@ -96,9 +103,9 @@ exports.deleteOneCourses = catchAsync(async (req, res, next) => {
 exports.addOneCourse = catchAsync(async (req, res, next) => {
     req.body.instructors = req.user.id
     req.body.imageCover = req.file.path.split('/').slice(1).join('/');
-    await Course.create(req.body)
+    const course = await Course.create(req.body)
 
-    res.redirect('/profile')
+    res.redirect(`/instructor/course/${course._id}/lesson`)
 })
 
 exports.getAllCourseInstructors = catchAsync(async (req, res, next) => {

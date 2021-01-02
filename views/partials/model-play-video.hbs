@@ -1,3 +1,5 @@
+{{#if data.isLooked }}
+
 <button type="button" class="btn btn-primary"
     data-toggle="modal" data-target="#a{{data._id}}">
     <svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -38,3 +40,5 @@
         </div>
     </div>
 </div>
+{{else}}
+{{/if}}
