@@ -1,14 +1,10 @@
 const express = require('express');
 const authController = require('../controllers/authController')
 const userController = require('../controllers/userController')
-const lessonController = require('../controllers/lessonController')
+
 
 const videoRoutes = require('./videoRoutes');
-// router.use('/user/course/:idCourse')
-//     .route('/lesson', lessonController)
-//     .route('/video',videoRoutes)
-// router.route('',videoRoutes )
-// router.route('')
+
 const router = express.Router();
 router.use('/user/add-video', videoRoutes)
 
