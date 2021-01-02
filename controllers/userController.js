@@ -2,7 +2,8 @@ const catchAsync = require("../utils/catchAsync")
 
 const {
     User,
-    Course
+    Course,
+    Orders
 } = require("../models/index")
 exports.getUserProfile = catchAsync(async (req, res, next) => {
     const user = await User.findById(req.user.id).lean()
@@ -86,5 +87,23 @@ exports.addCourses = catchAsync(async (req, res, next) => {
     res.render('instructors&admin/add-course', {
         user,
         layout: false
+    })
+})
+
+exports.getEnrolledCoursed = catchAsync(async (req, res, next) => {
+    const user = await User.findById(req.user.id).lean();
+    // query
+    const orders = await Orders.find({
+        user: req.user.id
+    }).populate({
+        path: 'course',
+        select: '_id title imageCover'
+    }).lean();
+
+    // Trick lua de giong nhu instructor // lay partials
+    res.render('instructors&admin/list-course', {
+        layout: false,
+        user,
+        courses: orders
     })
 })

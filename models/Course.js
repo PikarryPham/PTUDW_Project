@@ -70,6 +70,11 @@ const courseSchema = new mongoose.Schema({
   },
 
 }, schemaOptions);
+courseSchema.virtual('orders', {
+  ref: 'Orders',
+  foreignField: 'course',
+  localField: '_id'
+});
 courseSchema.virtual('reviews', {
   ref: 'Review',
   foreignField: 'course',

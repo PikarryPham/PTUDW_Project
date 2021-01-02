@@ -8,7 +8,7 @@ const reviewController = require('../controllers/reviewController');
 
 router
     .route('/')
-    .get(reviewController.getAllReviews)
+    .get(reviewController.getIndexReviews)
     .post(
         authController.protect,
         authController.restrictTo('user'),

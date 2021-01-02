@@ -4,11 +4,11 @@ const userController = require('../controllers/userController')
 
 
 const videoRoutes = require('./videoRoutes');
-
+const reviewRoutes = require('./reviewRoutes');
 const router = express.Router();
 router.use('/user/add-video', videoRoutes)
-
-// ROUTER FOR USER
+router.use('/user/course/:idCourse/review', reviewRoutes)
+// ROUTER FOR USERrouter.use('/:courseId/reviews', reviewRoutes);
 router.get('/', authController.index)
 router.get('/logout', authController.getLogout);
 router
@@ -26,6 +26,9 @@ router
     .post(authController.postRegister);
 
 
+router.use('/user/enrolledCourse', authController.protect, authController.restrictTo('user'));
+
+router.route('/user/enrolledCourse').get(userController.getEnrolledCoursed)
 
 router.use('/user/wish-list', authController.protect)
 router.route('/user/wish-list').get(userController.getAllWishListByUser)

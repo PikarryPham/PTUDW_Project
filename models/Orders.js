@@ -19,27 +19,28 @@ const orderSchema = new mongoose.Schema({
     },
     fullName: {
         type: String,
-        required: [true, 'Order must belong to a course.']
-    },
-    fullName: {
-        type: String,
-        required: [true, 'Order must belong to a course.']
+        required: [true, 'Order must belong to a course.'],
+        select: false
     },
     ccyear: {
         type: Number,
-        required: [true, 'Order must CCYEAR to a course']
+        required: [true, 'Order must CCYEAR to a course'],
+        select: false
     },
     cvv: {
         type: Number,
-        required: [true, 'Order must CCV to a course']
+        required: [true, 'Order must CCV to a course'],
+        select: false
     },
     ccmonth: {
         type: Number,
-        required: [true, 'Order must have CC Month a course']
+        required: [true, 'Order must have CC Month a course'],
+        select: false
     },
     numberCard: {
         type: Number,
-        required: [true, 'Order must number Credit Number card']
+        required: [true, 'Order must number Credit Number card'],
+        select: false
     },
     price: {
         type: Number,

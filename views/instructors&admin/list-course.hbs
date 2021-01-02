@@ -2,12 +2,26 @@
 {{> title-user titleName='List Course'}}
 <div class="row">
     {{#if courses.length}}
+
     <div class="container">
         <div class="row">
             {{#each courses}}
             <div
                 class="col-sm-2 col-md-4 col-lg-3 mr-4 mb-5">
                 <div class="card" style="width: 18rem;">
+                    {{#if ( ifCondUser ../user.role )}}
+                    <img class="card-img-top"
+                        src="/{{this.course.imageCover}}"
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {{this.course.title}}</h5>
+                        <a href="/user/course/{{this.course._id}}/review"
+                            class="btn btn-primary mr-2 mb-3">Review</a>
+                        <a href="/instructor/course/{{this._id}}/video"
+                            class="btn btn-primary mr-2 mb-3">Learned</a>
+                    </div>
+                    {{else}}
                     <img class="card-img-top"
                         src="/{{this.imageCover}}"
                         alt="Card image cap">
@@ -27,41 +41,13 @@
                             class="btn btn-primary mr-2 mb-3">Del
                             Course</a>
                     </div>
+                    {{/if}}
                 </div>
             </div>
 
             {{/each}}
 
-        </div>
-    </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1"
-        role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"
-                        id="exampleModalLabel">Modal title
-                    </h5>
-                    <button type="button" class="close"
-                        data-dismiss="modal"
-                        aria-label="Close">
-                        <span
-                            aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button"
-                        class="btn btn-secondary"
-                        data-dismiss="modal">Close</button>
-                    <button type="button"
-                        class="btn btn-primary">Save
-                        changes</button>
-                </div>
-            </div>
+
         </div>
     </div>
     {{else}}

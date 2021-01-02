@@ -86,7 +86,7 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
             }
         },
     ])
-    console.log(lessons)
+    console.log(course)
     res.render('single-course', {
         user,
         reviews: reviews.length ? reviews[0].counts : [],
