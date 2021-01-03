@@ -144,3 +144,20 @@ exports.getDeleteCourse = catchAsync(async (req, res, next) => {
     await course.save();
     res.redirect('/profile')
 })
+
+exports.getCompleteCourse = catchAsync(async (req, res, next) => {
+    const {
+        idCourse
+    } = req.params;
+    const course = await Course.findOne({
+        _id: idCourse,
+        instructors: req.user.id
+    });
+    if (!course) {
+        res.redirect('/profile');
+        return;
+    }
+    course.isCompleted = true;
+    await course.save();
+    res.redirect('/profile')
+})

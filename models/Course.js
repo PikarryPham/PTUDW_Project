@@ -72,6 +72,11 @@ const courseSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
     select: false
+  },
+  isCompleted: {
+    type: Boolean,
+    default: true,
+    select: false
   }
 
 }, schemaOptions);

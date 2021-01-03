@@ -2,11 +2,9 @@ const express = require('express');
 const authController = require('../controllers/authController')
 const userController = require('../controllers/userController')
 
-
-const videoRoutes = require('./videoRoutes');
 const reviewRoutes = require('./reviewRoutes');
 const router = express.Router();
-router.use('/user/add-video', videoRoutes)
+
 router.use('/user/course/:idCourse/review', reviewRoutes)
 // ROUTER FOR USERrouter.use('/:courseId/reviews', reviewRoutes);
 router.get('/', authController.index)
