@@ -11,7 +11,10 @@ exports.getIndexEditCourse = catchAsync(async (req, res, next) => {
         idCourse
     } = req.params;
     const user = await User.findById(req.user.id).lean();
-    const course = await Course.findById(idCourse).lean();
+    const course = await Course.findById({
+        _id: idCourse,
+        instructors: req.user.id
+    }).lean();
     if (!course) {
         res.redirect("/profile")
         return;
@@ -38,7 +41,10 @@ exports.getIndexLesson = catchAsync(async (req, res, next) => {
         },
         select: 'instructors',
     }).lean()
-    const course = await Course.findById(idCourse);
+    const course = await Course.findOne({
+        _id: idCourse,
+        instructors: req.user.id
+    });
     if (!lessons || !course) {
         res.redirect("/profile")
         return;
@@ -65,7 +71,10 @@ exports.postAddLesson = catchAsync(async (req, res, next) => {
         },
         select: 'instructors',
     }).lean()
-    const course = await Course.findById(idCourse);
+    const course = await Course.findById({
+        _id: idCourse,
+        instructors: req.user.id
+    });
     if (!lessons || !course) {
         res.redirect("/profile")
         return;
@@ -93,7 +102,10 @@ exports.getIndexAddVideo = catchAsync(async (req, res, next) => {
         },
         select: 'instructors',
     }).lean()
-    const course = await Course.findById(idCourse);
+    const course = await Course.findById({
+        _id: idCourse,
+        instructors: req.user.id
+    });
     if (!lessons || !course) {
         res.redirect("/profile")
         return;
@@ -112,7 +124,10 @@ exports.postAddVideo = catchAsync(async (req, res, next) => {
     } = req.params;
 
     const lessons = await Lesson.findById(req.body.idLesson);
-    const course = await Course.findById(idCourse);
+    const course = await Course.findOne({
+        _id: idCourse,
+        instructors: req.user.id
+    });
     if (!lessons || !course) {
         res.redirect("/profile")
         return;
@@ -127,7 +142,10 @@ exports.getDeleteCourse = catchAsync(async (req, res, next) => {
     const {
         idCourse
     } = req.params;
-    const course = await Course.findById(idCourse);
+    const course = await Course.findOne({
+        _id: idCourse,
+        instructors: req.user.id
+    });
     if (!course) {
         res.redirect('/profile');
         return;
