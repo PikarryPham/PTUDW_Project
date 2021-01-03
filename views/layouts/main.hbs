@@ -223,6 +223,12 @@
                                             Profile
                                         </a>
                                     </li>
+                                    {{#if (ifCondAdmin user.role)}}
+                                    <li><a href="/admin">
+                                            Admin
+                                        </a>
+                                    </li>
+                                    {{/if}}
 
                                     <li><a href="/logout">
                                             Log Out

@@ -34,6 +34,7 @@ exports.postLogin = catchAsync(async (req, res, next) => {
     if (!email || !password) {
 
         res.render('login', {
+            layout: false,
             error: 'Please provide email and password !'
         });
         return;

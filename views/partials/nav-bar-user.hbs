@@ -14,6 +14,7 @@
         <!-- sidebar menu start -->
         <nav class="ttr-sidebar-navi">
             <ul>
+                {{#if (ifCondUserInstructor user.role)}}
                 <li>
                     <a href="/profile"
                         class="ttr-material-button">
@@ -23,7 +24,8 @@
                             class="ttr-label">Profile</span>
                     </a>
                 </li>
-                {{#if (ifCondAdminInstructor user.role)}}
+                {{/if }}
+                {{#if (ifCondInstructor user.role)}}
                 <li>
                     <a href="/course/user"
                         class="ttr-material-button">
@@ -43,9 +45,8 @@
                             Course</span>
                     </a>
                 </li>
-
-                {{else}}
                 {{/if}}
+                {{#if (ifCondUser user.role)}}
                 <li>
                     <a href="/user/wish-list"
                         class="ttr-material-button">
@@ -67,9 +68,10 @@
                     </a>
 
                 </li>
+                {{/if}}
                 {{#if (ifCondAdmin user.role )  }}
                 <li>
-                    <a href="bookmark.html"
+                    <a href="/admin"
                         class="ttr-material-button">
                         <span class="ttr-icon"><i
                                 class="ti-bookmark-alt"></i></span>
@@ -78,7 +80,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="bookmark.html"
+                    <a href="/admin/user"
                         class="ttr-material-button">
                         <span class="ttr-icon"><i
                                 class="ti-bookmark-alt"></i></span>
@@ -87,14 +89,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="teacher-profile.html"
+                    <a href="/admin/instructor"
                         class="ttr-material-button"><span
-                            class="ttr-label">All
-                            Teacher</span></a>
+                            class="ttr-icon"><i
+                                class="ti-bookmark-alt"></i></span>
+                        <span class="ttr-label">All
+                            Instructor</span>
                 </li>
-                {{else}}
                 {{/if}}
-                <li class="ttr-seperate"></li>
+
             </ul>
             <!-- sidebar menu end -->
         </nav>

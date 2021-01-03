@@ -1,12 +1,15 @@
 const {
-    Review
+    Review,
+    User
 } = require('../models/index')
 const catchAsync = require("../utils/catchAsync");
 
 exports.getIndexReviews = catchAsync(async (req, res, next) => {
+    const user = await User.findById(req.user.id).lean();
     res.render('review-course', {
         idCourse: req.params.idCourse,
-        layout: false
+        layout: false,
+        user,
     });
 })
 exports.setCourseUserIds = (req, res, next) => {

@@ -6,6 +6,9 @@ module.exports = {
     ifCondAdminInstructor(role) {
         return ['admin', 'instructors'].includes(role)
     },
+    ifCondUserInstructor(role) {
+        return ['user', 'instructors'].includes(role)
+    },
     ifCondAdmin(role) {
         return ['admin'].includes(role)
     },

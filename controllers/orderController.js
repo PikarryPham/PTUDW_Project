@@ -25,11 +25,14 @@ exports.postOrderCheckOut = async (req, res, next) => {
         courseId
     } = req.params
     const user = await User.findById(req.user.id).lean();
-    const course = await Course.findById(courseId).lean();
+    const course = await Course.findById(courseId);
+
     if (!user || !course) {
         res.redirect('/login')
         return;
     }
+    course.enrolled = course.enrolled + 1
+    await course.save()
     req.body.user = req.user.id;
     req.body.course = courseId
     req.body.price = course.price;

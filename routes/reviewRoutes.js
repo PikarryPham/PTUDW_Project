@@ -5,13 +5,11 @@ const router = express.Router({
 });
 const authController = require('../controllers/authController');
 const reviewController = require('../controllers/reviewController');
-
+router.use(authController.protect, authController.restrictTo('user'))
 router
     .route('/')
     .get(reviewController.getIndexReviews)
     .post(
-        authController.protect,
-        authController.restrictTo('user'),
         reviewController.setCourseUserIds,
         reviewController.createReview
     )
