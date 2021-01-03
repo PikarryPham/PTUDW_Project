@@ -1,0 +1,31 @@
+{{#> user-profile-layout}}
+{{> title-user titleName= video.titleVideo}}
+<div class="row mt-5" style="max-height: 600px;">
+    <div class="col-lg-9" style="height: 100%;">
+        <video id="my-video" class="video-js" controls
+            preload="auto" width="80%" height="100%"
+            poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
+            <source src="/{{video.pathUrl}}"
+                type="video/mp4" />
+            <source src="MY_VIDEO.webm" type="video/webm" />
+            <p class="vjs-no-js">
+                To view this video please enable JavaScript,
+                and
+                consider upgrading to a
+                web browser that
+                <a href="https://videojs.com/html5-video-support/"
+                    target="_blank">supports HTML5 video</a>
+            </p>
+        </video>
+    </div>
+    <div class="col-lg-3  " style="
+        background-color: #ccc;width: 70%;max-height: 600px;padding:45px;
+            overflow: auto;">
+        {{#each videos}}
+        <a class="btn btn-secondary mb-3" style=" width: 100%;
+            padding: 10px 8px;"
+            href="/user/learned/{{../idCourse}}/lesson/{{../idLesson}}/video/{{this._id}}">{{this.titleVideo}}</a>
+        {{/each}}
+    </div>
+</div>
+{{/user-profile-layout}}

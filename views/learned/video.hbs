@@ -1,0 +1,24 @@
+{{#> user-profile-layout}}
+{{> title-user titleName='Video Course'}}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Name Video</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each videos}}
+        <tr class="mb-5">
+            <th scope="row">{{@index}}</th>
+            <td>{{this.titleVideo}}</td>
+            <td><a href="/user/learned/{{../idCourse}}/lesson/{{../idLesson}}/video/{{this._id}}"
+                    role="button" class="btn btn-primary">
+                    Watch Video
+                </a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{/user-profile-layout}}

@@ -3,7 +3,9 @@ const catchAsync = require("../utils/catchAsync")
 const {
     User,
     Course,
-    Orders
+    Orders,
+    Lesson,
+    Video
 } = require("../models/index")
 exports.getUserProfile = catchAsync(async (req, res, next) => {
     const user = await User.findById(req.user.id).lean()
@@ -105,5 +107,67 @@ exports.getEnrolledCoursed = catchAsync(async (req, res, next) => {
         layout: false,
         user,
         courses: orders
+    })
+})
+
+exports.getEnrolledLesson = catchAsync(async (req, res, next) => {
+    const {
+        idCourse,
+    } = req.params;
+
+    const lessons = await Lesson.find({
+        idCourse: idCourse
+    }).lean()
+
+    const user = await User.findById(req.user.id).lean()
+    res.render('learned/lesson', {
+        layout: false,
+        user,
+        lessons,
+        idCourse,
+
+    })
+})
+
+exports.getEnrolledVideo = catchAsync(async (req, res, next) => {
+    const {
+        idLesson,
+        idCourse
+    } = req.params;
+    const user = await User.findById(req.user.id).lean();
+    const videos = await Video.find({
+        idLesson
+    }).lean()
+    res.render('learned/video', {
+        layout: false,
+        user,
+        videos,
+        idCourse,
+        idLesson
+    })
+})
+
+exports.getEnrolledWatch = catchAsync(async (req, res, next) => {
+    const {
+        idLesson,
+        idCourse,
+        idVideo,
+    } = req.params;
+    const user = await User.findById(req.user.id).lean();
+    const videos = await Video.find({
+        idLesson
+    }).lean();
+    const video = await Video.findById(idVideo).lean();
+    if (!video) {
+        res.redirect('/profile');
+        return;
+    }
+    res.render('learned/learnedCourse', {
+        layout: false,
+        videos,
+        video,
+        user,
+        idCourse,
+        idLesson
     })
 })

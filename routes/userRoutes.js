@@ -39,6 +39,9 @@ router.route('/user/wish-list/:idCourse/delete').get(authController.protect, use
 
 router.route('/user/add-course').get(authController.protect, authController.restrictTo('instructors', 'admin'), userController.addCourses)
 
+router.route('/user/learned/:idCourse').get(authController.protect, userController.getEnrolledLesson)
+router.route('/user/learned/:idCourse/lesson/:idLesson/video').get(authController.protect, userController.getEnrolledVideo)
+router.route('/user/learned/:idCourse/lesson/:idLesson/video/:idVideo').get(authController.protect, userController.getEnrolledWatch)
 router
     .route('/login')
     .get(authController.getLogin)
