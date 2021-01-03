@@ -122,3 +122,17 @@ exports.postAddVideo = catchAsync(async (req, res, next) => {
     await Video.create(req.body);
     res.redirect('/profile')
 })
+
+exports.getDeleteCourse = catchAsync(async (req, res, next) => {
+    const {
+        idCourse
+    } = req.params;
+    const course = await Course.findById(idCourse);
+    if (!course) {
+        res.redirect('/profile');
+        return;
+    }
+    course.active = false;
+    await course.save();
+    res.redirect('/profile')
+})

@@ -15,6 +15,9 @@ router.route("/course/:idCourse/lesson")
 router.route("/course/:idCourse/video")
     .get(instructorController.getIndexAddVideo)
     .post(upload.single('pathUrl'), instructorController.postAddVideo)
+router.route("/course/:idCourse/delete")
+    .get(instructorController.getDeleteCourse)
+
 
 // Muốn add video thì phải có lesson cho video ?
 

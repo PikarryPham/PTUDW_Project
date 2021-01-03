@@ -68,8 +68,21 @@ const courseSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A course must have text Description']
   },
+  active: {
+    type: Boolean,
+    default: true,
+    select: false
+  }
 
 }, schemaOptions);
+courseSchema.pre(/^find/, function (next) {
+  this.find({
+    active: {
+      $ne: false
+    }
+  });
+  next();
+});
 courseSchema.virtual('orders', {
   ref: 'Orders',
   foreignField: 'course',
