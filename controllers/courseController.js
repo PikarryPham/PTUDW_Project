@@ -39,7 +39,10 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
         id
     } = req.params;
     const user = await User.findById(req.signedCookies.jwt).lean();
-    const course = await Course.findById(id).lean();
+    const course = await Course.findById(id).populate({
+        path: 'instructors',
+        select: '+description'
+    }).lean();
     course.ratingsAverage = course.reviews.reduce((prev, acc) => prev += acc.rating, 0) / course.reviews.length || 0;
     course.lengthReviews = course.reviews.length;
     const isEnrolled = await Orders.findOne({
@@ -52,6 +55,7 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
         path: 'videos',
         select: '-created_at -updated_at -__v '
     }).lean()
+
 
     const reviews = await Review.aggregate([{
             $match: {
