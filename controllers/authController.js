@@ -79,7 +79,7 @@ exports.index = async (req, res) => {
     req.query.limit = 4;
     const features = new APIFeatures(Course.find(), req.query).paginate();
     const courses = await features.query.lean();
-    req.query.sort = 'create_at';
+    req.query.sort = '-created_at';
     const apiFeatures = new APIFeatures(Course.find(), req.query).paginate().sort();
     const newCourses = await apiFeatures.query.lean();
     res.render("index", {
