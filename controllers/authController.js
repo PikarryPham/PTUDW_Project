@@ -78,10 +78,14 @@ exports.index = async (req, res) => {
     const user = await User.findById(req.signedCookies.jwt).lean();
     req.query.limit = 4;
     const features = new APIFeatures(Course.find(), req.query).paginate();
-    const courses = await features.query.lean()
+    const courses = await features.query.lean();
+    req.query.sort = 'create_at';
+    const apiFeatures = new APIFeatures(Course.find(), req.query).paginate().sort();
+    const newCourses = await apiFeatures.query.lean();
     res.render("index", {
         user,
         courses,
+        newCourses
     });
 }
 

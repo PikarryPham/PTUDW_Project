@@ -5,13 +5,9 @@ const {
     Course,
     User,
     Review,
-    Video,
     Lesson,
     Orders
 } = require('../models/index');
-
-
-
 
 
 exports.getAllCourses = catchAsync(async (req, res, next) => {

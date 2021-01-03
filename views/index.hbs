@@ -822,7 +822,7 @@
 				<h1>Popular Courses</h1>
 			</div>
 			<div class="right-part">
-				<a class="button-one" href="#">View
+				<a class="button-one" href="/course">View
 					All Courses</a>
 			</div>
 		</div>
@@ -830,6 +830,76 @@
 			<div class="row">
 
 				{{#each courses}}
+				<div class="col-lg-3 col-md-6">
+					<div class="course-post">
+						<div
+							class="course-thumbnail-holder">
+							<a href="single-course.html">
+								<img src="{{this.imageCover}}"
+									alt="">
+							</a>
+						</div>
+						<div class="course-content-holder">
+							<div
+								class="course-content-main">
+								<h2 class="course-title">
+									<a
+										href="single-course.html">{{this.title}}</a>
+								</h2>
+								<div
+									class="course-rating-teacher">
+									<div class="star-rating has-ratings"
+										title="Rated 5.00 out of 5">
+										<span
+											style="width:100%">
+											<span
+												class="rating">{{this.ratingAverage}}</span>
+											<span
+												class="votes-number">2
+												Votes</span>
+										</span>
+									</div>
+									<a href="#"
+										class="course-loop-teacher">{{this.instructors.name}}</a>
+								</div>
+							</div>
+							<div
+								class="course-content-bottom">
+								<div
+									class="course-students">
+									<i
+										class="material-icons">group</i>
+									<span>{{this.enrolled}}</span>
+								</div>
+								<div class="course-price">
+									<span>£{{this.price}}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{{/each}}
+
+			</div>
+		</div>
+	</div>
+</section>
+<section class="popular-courses-section">
+	<div class="container">
+		<div class="title-section">
+			<div class="left-part">
+				<span>Education</span>
+				<h1>New Courses</h1>
+			</div>
+			<div class="right-part">
+				<a class="button-one" href="/course">View
+					All Courses</a>
+			</div>
+		</div>
+		<div class="popular-courses-box">
+			<div class="row">
+
+				{{#each newCourses}}
 				<div class="col-lg-3 col-md-6">
 					<div class="course-post">
 						<div
