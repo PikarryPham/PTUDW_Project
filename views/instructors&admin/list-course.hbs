@@ -40,9 +40,13 @@
                         <a href="/instructor/course/{{this._id}}/delete"
                             class="btn btn-primary mr-2 mb-3">Del
                             Course</a>
+
+
+                        {{#unless this.isCompleted}}
                         <a href="/instructor/course/{{this._id}}/complete"
                             class="btn btn-primary mr-2 mb-3">Complete
                         </a>
+                        {{/unless}}
                     </div>
                     {{/if}}
                 </div>

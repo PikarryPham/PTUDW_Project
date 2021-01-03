@@ -108,8 +108,8 @@ exports.getAllCourseInstructors = catchAsync(async (req, res, next) => {
 
     const courses = await Course.find({
         instructors: req.user.id
-    }).lean();
-    const user = await User.findById(req.user.id).lean()
+    }).select('+isCompleted').lean();
+    const user = await User.findById(req.user.id).lean();
     res.render('instructors&admin/list-course', {
         courses,
         user,
