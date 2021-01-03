@@ -32,27 +32,17 @@ exports.getIndexLesson = catchAsync(async (req, res, next) => {
         idCourse
     } = req.params;
     const user = await User.findById(req.user.id).lean();
-    const lessons = await Lesson.find({
-        idCourse: idCourse
-    }).populate({
-        path: 'idCourse',
-        match: {
-            instructors: req.user.id,
-        },
-        select: 'instructors',
-    }).lean()
     const course = await Course.findOne({
         _id: idCourse,
         instructors: req.user.id
     });
-    if (!lessons || !course) {
+    if (!course) {
         res.redirect("/profile")
         return;
     }
     res.render('instructors&admin/add-lesson', {
         user,
         layout: false,
-        lessons,
         idCourse,
 
     })

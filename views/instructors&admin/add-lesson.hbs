@@ -42,34 +42,7 @@
                     </div>
                 </form>
             </div>
-            {{#if lessons.length}}
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">STT</th>
-                        <th scope="col">Lesson Name</th>
-                        <th scope="col">Delete</th>
-                        <th scope="col">Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each lessons}}
-                    <tr>
-                        <th scope="row">{{@index}}</th>
-                        <td>{{this.titleLesson}}</td>
-                        <td><a href="#">Edit Lesson</a></td>
-                        <td><a href="#">Delete Lesson</a>
-                        </td>
-                    </tr>
-                    {{/each}}
-
-                </tbody>
-            </table>
-            {{else }}
-            <h2 class="text-center">You do not have lessons
-            </h2>
-            {{/if}}
         </div>
     </div>
 </div>
