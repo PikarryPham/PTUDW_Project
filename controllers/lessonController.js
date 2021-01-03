@@ -18,7 +18,7 @@ exports.getIndexLesson = catchAsync(async (req, res, next) => {
         res.redirect("/profile")
         return;
     }
-    res.render('instructors&admin/add-lesson', {
+    res.render('instructors/add-lesson', {
         user,
         layout: false,
         idCourse,

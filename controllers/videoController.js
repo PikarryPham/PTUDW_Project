@@ -29,7 +29,7 @@ exports.getIndexAddVideo = catchAsync(async (req, res, next) => {
         res.redirect("/profile")
         return;
     }
-    res.render('instructors&admin/add-video', {
+    res.render('instructors/add-video', {
         user,
         layout: false,
         lessons,

@@ -86,7 +86,7 @@ exports.deleteOneWishList = catchAsync(async (req, res, next) => {
 
 exports.addCourses = catchAsync(async (req, res, next) => {
     const user = await User.findById(req.user.id).lean()
-    res.render('instructors&admin/add-course', {
+    res.render('instructors/add-course', {
         user,
         layout: false
     })
@@ -103,7 +103,7 @@ exports.getEnrolledCoursed = catchAsync(async (req, res, next) => {
     }).lean();
 
     // Trick lua de giong nhu instructor // lay partials
-    res.render('instructors&admin/list-course', {
+    res.render('instructors/list-course', {
         layout: false,
         user,
         courses: orders
