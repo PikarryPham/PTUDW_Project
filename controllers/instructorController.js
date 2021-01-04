@@ -2,8 +2,6 @@ const catchAsync = require("../utils/catchAsync");
 const {
     User,
     Course,
-    Lesson,
-    Video
 } = require("../models");
 
 exports.getIndexEditCourse = catchAsync(async (req, res, next) => {
@@ -65,4 +63,4 @@ exports.getCompleteCourse = catchAsync(async (req, res, next) => {
     course.isCompleted = true;
     await course.save();
     res.redirect('/profile')
-})
+}) 

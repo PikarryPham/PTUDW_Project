@@ -219,10 +219,13 @@
                                     <i
                                         class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown level2">
+                                    {{#unless (ifCondAdmin user.role)}}
+
                                     <li><a href="/profile">
                                             Profile
                                         </a>
                                     </li>
+                                    {{/unless}}
                                     {{#if (ifCondAdmin user.role)}}
                                     <li><a href="/admin">
                                             Admin
