@@ -7,6 +7,11 @@
         <h4>User Profile</h4>
       </div>
       <div class="widget-inner">
+        {{#if error}}
+        <div class="alert alert-danger" role="alert">
+          {{error}}
+        </div>
+        {{/if}}
         <form class="edit-profile m-b30"
           action="/user/updateMe" method="POST">
           <div class="">
@@ -47,7 +52,7 @@
                 class="col-sm-2 col-form-label">Description:</label>
               <div class="col-sm-7">
                 <textarea class="form-control" type="text"
-                  name="description"></textarea>
+                  name="description">{{user.description}}</textarea>
               </div>
             </div>
             {{/if}}

@@ -1307,13 +1307,18 @@ section.courses-section .courses-top-bar form button {
 
 .course-post .course-thumbnail-holder img {
   width: 100%;
-  height: auto;
+  height: 150px;
 }
 
 .course-post .course-content-main {
   padding: 20px;
   overflow: hidden;
 }
+
+.course-post .course-content-main .course-title {
+  height: 75px;
+}
+
 
 .course-post .course-content-main h2 a {
   color: #2f2f32;

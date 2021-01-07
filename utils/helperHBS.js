@@ -29,5 +29,22 @@ module.exports = {
             accum += `${data}`
         }
         return accum;
+    },
+    handlePagination(queryObj,numberPage) {
+        if(queryObj.category) {
+            return  `?page=${numberPage}&category=${queryObj.category}`
+        }else if (queryObj.title && !queryObj.sort) {
+            return `?page=${numberPage}&title=${queryObj.title}`
+        }else if(queryObj.title && queryObj.sort) {
+            return `?page=${numberPage}&title=${queryObj.title}&sort=${queryObj.sort}`
+        }
+        return `?page=${numberPage}`
+    },
+    getPositiveNumbers(number) {
+        const date =  Date.parse(number);
+        if(new Date() - (date + 1000*60*60*12) > 0) {
+            return false
+        }
+        return true;
     }
 }

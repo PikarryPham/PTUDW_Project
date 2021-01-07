@@ -8,7 +8,8 @@
             </div>
             <div class="widget-inner">
                 <form class="edit-profile m-b30"
-                    action="/course" method="POST"
+                    action="/instructor/course/{{course._id}}"
+                    method="POST"
                     enctype="multipart/form-data">
                     <div class="">
                         <div class="form-group row">
@@ -87,7 +88,7 @@
                                     height="100px"
                                     alt="imageCover"
                                     srcset="">
-                                <input type="file" required
+                                <input type="file"
                                     name="imageCover"
                                     class="form-control-file"
                                     id="exampleFormControlFile1">

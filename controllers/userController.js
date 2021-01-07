@@ -12,7 +12,9 @@ exports.getUserProfile = catchAsync(async (req, res, next) => {
     res.render('user-profile', {
         layout: false,
         user,
+        error: req.session.error
     })
+    req.session.destroy();
 })
 const filterObj = (obj, ...allowedFields) => {
     const newObj = {};
@@ -26,11 +28,8 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     // 1) Create error if users POTSs password data
 
     if (req.body.password || req.body.passwordConfirm) {
-        res.render('user-profile', {
-            layout: false,
-            notification: 'Do not Update password or password '
-        })
-        // bug
+        res.redirect('/profile')
+        req.session.error = 'Do not Update password or password'
         return;
     }
 

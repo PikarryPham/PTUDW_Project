@@ -7,6 +7,10 @@ const courseSchema = new mongoose.Schema({
     enum: ['IT', 'Business', 'Design', 'Languages', 'Marketing'],
     default: 'IT'
   },
+  onViewed:{
+    type: Number,
+    default: 0,
+  },
   title: {
     type: String,
     required: [true, 'Course must have name'],

@@ -1,5 +1,4 @@
 const catchAsync = require("../utils/catchAsync");
-const AppError = require('../utils/appError');
 
 const {
     User,
@@ -44,20 +43,39 @@ exports.postLogin = catchAsync(async (req, res, next) => {
     const user = await User.findOne({
         email
     }).select('+password');
+    if(!user) {
+        res.render('login', {
+            layout: false,
+            error: 'Incorrect email or password'
+        });
+        return
+    }
     const correct = await user.correctPassword(password, user.password);
 
-    if (!user || !correct) {
+    if (!correct) {
         res.render('login', {
+            layout: false,
             error: 'Incorrect email or password'
         });
         return;
     }
     createdSendCookie(user, res);
 })
-exports.postRegister = catchAsync(async (req, res, next) => {
-    const newUser = await User.create(req.body);
-    createdSendCookie(newUser, res)
-})
+exports.postRegister = async (req, res, next) => {
+    try {
+        
+        const newUser = await User.create(req.body);
+        createdSendCookie(newUser, res)
+    } catch(err) {
+        let message;
+        if (err.code === 11000) {
+            err = err.message.match(/(["'])(.*?[^\\])\1/)[0];
+            message = `Duplicate field value: ${value}. Please use another value!!`;
+        }
+        req.session.error = message ? message : err.message;
+        res.redirect('/register')
+    }
+}
 exports.getLogin = async (req, res, next) => {
 
     if (req.signedCookies.jwt) {
@@ -65,14 +83,18 @@ exports.getLogin = async (req, res, next) => {
         return;
     }
     res.render("login", {
-        layout: false
+        layout: false,
+        error: req.session.error
     });
+    req.session.destroy();
 }
 exports.getRegister = async (req, res, next) => {
 
     res.render("register", {
-        layout: false
+        layout: false,
+         error: req.session.error
     })
+    req.session.destroy();
 }
 exports.index = async (req, res) => {
     const user = await User.findById(req.signedCookies.jwt).lean();
@@ -82,10 +104,13 @@ exports.index = async (req, res) => {
     req.query.sort = '-created_at';
     const apiFeatures = new APIFeatures(Course.find(), req.query).paginate().sort();
     const newCourses = await apiFeatures.query.lean();
+    const watchedCourses = await Course.find().sort({onViewed: -1}).limit(4).lean();
+
     res.render("index", {
         user,
         courses,
-        newCourses
+        newCourses,
+        watchedCourses
     });
 }
 
@@ -97,9 +122,9 @@ exports.getLogout = async (req, res) => {
 exports.restrictTo = (...roles) => {
     return async (req, res, next) => {
         if (!roles.includes(req.user.role)) {
-            return next(
-                new AppError('You  do not have permission to perform this action', req.originalUrl)
-            );
+            req.session.error = 'You do not permission this action! Please try again !';
+            res.clearCookie("jwt");
+            res.redirect('/login');
         }
         console.log('restrict To is running !')
         next();
@@ -111,9 +136,8 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
     // 2) Check if posted current password is correct
     if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
-        res.render('user-profile    ', {
-            err: `Password current or password don't' match.`
-        })
+        req.session.error = `Password current or password don't' match.`
+        res.redirect('/profile')
         return;
     }
     // 3) If so, update password
@@ -132,9 +156,9 @@ exports.protect = catchAsync(async (req, res, next) => {
     const user = await User.findById(req.signedCookies.jwt);
 
     if (!user) {
-        res.render('login', {
-            err: 'You must login make access permission'
-        })
+        req.session.error = 'You must login make access permission';
+        res.clearCookie("jwt");
+        res.redirect('/login');
         return;
     }
     req.user = user;
@@ -144,8 +168,10 @@ exports.protect = catchAsync(async (req, res, next) => {
 
 exports.getForgotPassword = catchAsync(async (req, res, next) => {
     res.render('forgot-password', {
-        layout: false
+        layout: false,
+        error: req.session.err
     })
+    req.session.destroy();
 })
 
 exports.postForgotPassword = catchAsync(async (req, res, next) => {
@@ -154,7 +180,8 @@ exports.postForgotPassword = catchAsync(async (req, res, next) => {
     });
     if (!user) {
         res.render('forgot-password', {
-            err: "There is no user with that email address"
+            error: "There is no user with that email address",
+            layout: false
         })
         return;
     }
@@ -216,7 +243,7 @@ exports.postRestPassword = catchAsync(async (req, res, next) => {
     });
     if (!user) {
         res.redirect('/forgotPassword')
-        // bug
+        req.session.error = 'Token is expired  ! Please Try again'
         return;
 
     }

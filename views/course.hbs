@@ -37,24 +37,26 @@
 									required
 									placeholder="Search Courses..." />
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<label for="inputState"
+									style="font-size: 14px;"
 									class="form-label">Filter
-									Price
+									Price & Rating
 									:
 								</label>
 								<select name="sort"
 									id="inputState" required
 									class="form-select">
 									<option value="-price">
-										Increase
+										Increase Price
 									</option>
 									<option value="+price">
-										Decrease
+										Decrease Price
 									</option>
 								</select>
 							</div>
-							<div class="col-md-3">
+
+							<div class="col-md-2">
 								<button type="submit" style="background-color: #007bff; color:white;
 									width:80px" class="btn btn-primary">
 									Search
@@ -66,15 +68,20 @@
 				</div>
 
 				<div class="row">
-
+					{{#if courses.length}}
 					{{#each courses}}
 					<div class="col-lg-4 col-md-6 col-sm-6">
+						{{#if (getPositiveNumbers this.createAt) }}
+						<span
+							class=" position-absolute badge bg-primary text-white text-right">New
+							course</span>
+						{{/if}}
 						<div class="course-post">
 							<div
 								class="course-thumbnail-holder">
 								<a
 									href="/course/{{this._id}}">
-									<img src="{{this.imageCover}}"
+									<img src="/{{this.imageCover}}"
 										alt="">
 								</a>
 							</div>
@@ -96,7 +103,7 @@
 												<span
 													class="rating">{{this.ratingsAverage}}</span>
 												<span
-													class="votes-number">{{this.ratingsAverage}}</span>
+													class="votes-number">{{this.lengthReviews}}</span>
 											</span>
 										</div>
 										<a href="#"
@@ -120,7 +127,26 @@
 						</div>
 					</div>
 					{{/each}}
+					{{else}}
+					<h2>No course can't find</h2>
+					{{/if}}
+
 				</div>
+				{{#if courses.length}}
+				<nav aria-label="Page navigation example">
+					<ul
+						class="pagination justify-content-end">
+						<li class="page-item"><a
+								class="page-link"
+								href={{handlePagination query 1}}>1</a>
+						</li>
+						<li class="page-item"><a
+								class="page-link"
+								href={{handlePagination query 2}}>2</a>
+						</li>
+					</ul>
+				</nav>
+				{{/if}}
 			</div>
 
 			<div class="col-lg-4">
@@ -154,7 +180,7 @@
 							<li>
 								<a
 									href="/course?title={{this.title}}"><img
-										src="{{this.imageCover}}"
+										src="/{{this.imageCover}}"
 										alt=""></a>
 								<div class="list-content">
 									<h3><a
@@ -166,13 +192,6 @@
 							{{/each}}
 						</ul>
 					</div>
-					<div class="ads-widget widget">
-						<a href="#">
-							<img src="upload/blog/ad-banner.jpg"
-								alt="">
-						</a>
-					</div>
-
 				</div>
 			</div>
 
@@ -180,6 +199,7 @@
 
 	</div>
 </section>
+
 <!-- End courses section -->
 
 

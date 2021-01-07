@@ -1,7 +1,7 @@
 {{#> user-profile-layout}}
-{{> title-user titleName='Admin Course'}}
+{{> title-user titleName='Instructor'}}
 <div class="row">
-    {{#if courses.length}}
+    {{#if users.length}}
 
     <div class="container">
         <div class="row">
@@ -9,23 +9,23 @@
                 <thead>
                     <tr>
                         <th scope="col">STT</th>
-                        <th scope="col">Course Name</th>
                         <th scope="col">Instructor Name</th>
-                        <th scope="col">Looked</th>
-                        <th scope="col">Drop Course</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">View</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{#each courses}}
+                    {{#each users}}
                     <tr>
                         <th scope="row">{{@index}}</th>
-                        <td>{{this.title}}</td>
-                        <td>{{this.instructors.name}}</td>
-                        <td> {{> model-course-admin data = this}}
-                        </td>
-                        <td><a href="#" role="button"
-                                class="btn btn-primary">Drop
-                                Course</a></td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.email}}</td>
+                        <td> {{> model-user-admin data = this}}
+                        <td><a href="/admin/instructor/{{this._id}}/delete"
+                                role="button"
+                                class="btn btn-primary">Delete
+                                Instructor</a></td>
                     </tr>
                     {{/each}}
 
