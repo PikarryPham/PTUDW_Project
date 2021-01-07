@@ -1,0 +1,9 @@
+---------04-01-2021---------
+1. UI interface of admin basic (done).
+2. Delete data json
+3. Fix the UI of admin view.
+4. Separate the admin instructor folder.
+---------05-01-2021---------
+1. Add error handling for route from server.
+---------06-01-2021---------
+Fix and add pagination, add the function that display the saler when come to single course.

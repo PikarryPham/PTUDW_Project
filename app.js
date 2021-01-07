@@ -1,5 +1,6 @@
 const express = require('express');
 const exphbs = require("express-handlebars");
+const session = require('express-session');
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const app = express();
@@ -11,6 +12,11 @@ const adminRoutes = require('./routes/adminRoutes');
 
 const globalError = require('./controllers/errorController');
 const helperHBS = require('./utils/helperHBS');
+app.use(session({
+    resave: true, 
+    saveUninitialized: true, 
+    secret: 'somesecret', 
+    cookie: { maxAge: 60000 }}))
 app.use(bodyParser.urlencoded({
     defaultLayout: 'main',
     extended: false,

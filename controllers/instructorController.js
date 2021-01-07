@@ -24,11 +24,25 @@ exports.getIndexEditCourse = catchAsync(async (req, res, next) => {
         layout: false
     })
 })
-
-
-
-
-// VIDEO
+exports.postEditCourse = catchAsync(async(req,res,next) => {
+     const {
+        idCourse
+    } = req.params;
+    const course = await Course.findById({
+        _id: idCourse,
+        instructors: req.user.id
+    });
+    if (!course) {
+        req.session.error = 'Courses invalid please choose again !'
+        res.redirect(`/instructor/course/${idCourse}`)
+        return;
+    }
+    if(req.file) {
+        req.body.imageCover = req.file.path.split('/').slice(1).join('/');
+    }
+    await course.updateOne(req.body);
+    res.redirect(`/instructor/course/${idCourse}`)
+})
 
 
 exports.getDeleteCourse = catchAsync(async (req, res, next) => {
@@ -57,6 +71,7 @@ exports.getCompleteCourse = catchAsync(async (req, res, next) => {
         instructors: req.user.id
     });
     if (!course) {
+        req.session.error = 'Course not invalid please type'
         res.redirect('/profile');
         return;
     }

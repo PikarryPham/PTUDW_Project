@@ -60,13 +60,13 @@
 									<span
 										class="rating">{{course.ratingsAverage}}</span>
 									<span
-										class="votes-number">{{course.ratingsAverage}}
+										class="votes-number">{{course.lengthReviews}}
 										votes</span>
 								</div>
 							</div>
 						</div>
 						<div class="course-single-gallery">
-							<img src="{{course.imageCover}}"
+							<img src="/{{course.imageCover}}"
 								alt="">
 						</div>
 
@@ -314,3 +314,4 @@
 
 	</div>
 </section>
+{{> section-course-index data = bestSaleEqualCategory nameSection ='Best Sale Category'}}

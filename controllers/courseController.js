@@ -16,19 +16,27 @@ exports.getAllCourses = catchAsync(async (req, res, next) => {
     let features;
     const user = await User.findById(req.signedCookies.jwt).lean();
     if (req.query.title) {
-        features = new APIFeatures(Course.find(), req.query).findByTitle().sort()
+        features = new APIFeatures(Course.find(), req.query).findByTitle().sort().paginate()
     } else if (req.query.category) {
-        features = new APIFeatures(Course.find(), req.query).findByCategory()
+        features = new APIFeatures(Course.find(), req.query).paginate().findByCategory()
     } else {
-        features = new APIFeatures(Course.find(), req.query)
+        features = new APIFeatures(Course.find(), req.query).paginate()
     }
-    const courses = await features.query.lean();
+    
+    let courseWait = await features.query.lean();
+    let courses = courseWait.map(course => {
+        course.ratingsAverage = course.reviews.reduce((prev, acc) => prev += acc.rating, 0) / course.reviews.length || 0;
+        course.lengthReviews = course.reviews.length;
+        return course;
+    })
+        
     //atCourse để chứung minh nó ở router course để render nav
     res.render('course', {
         length: courses.length,
         courses,
         atCourse: true,
         user,
+        query: req.query
     })
 
 
@@ -39,7 +47,7 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
         id
     } = req.params;
     const user = await User.findById(req.signedCookies.jwt).lean();
-    const course = await Course.findById(id).populate({
+    const course = await Course.findByIdAndUpdate(id,{$inc : {'onViewed' : 1}}).populate({
         path: 'instructors',
         select: '+description'
     }).lean();
@@ -55,7 +63,37 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
         path: 'videos',
         select: '-created_at -updated_at -__v '
     }).lean()
-
+    const bestSaleEqualCategory = await Course.aggregate([
+        {
+            $match: {
+                category: course.category
+            }
+        },{
+            $match: {
+                active: true
+            }
+        }, 
+        {
+            $lookup:{
+                from: 'orders',
+                localField:'_id',
+                foreignField: 'course',
+                as: "total"
+            }
+        },
+        {
+            $addFields: {
+                subscribedGroupsLength: {
+                    $size: "$total"
+                }
+            }
+        },
+        {
+            $sort: {
+            subscribedGroupsLength: -1
+            }
+        }
+    ])
 
     const reviews = await Review.aggregate([{
             $match: {
@@ -86,18 +124,14 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
             }
         },
     ])
-    console.log(course)
     res.render('single-course', {
         user,
         reviews: reviews.length ? reviews[0].counts : [],
         course,
         lessons,
-        isEnrolled
+        isEnrolled,
+        bestSaleEqualCategory
     })
-})
-
-exports.deleteOneCourses = catchAsync(async (req, res, next) => {
-
 })
 
 exports.addOneCourse = catchAsync(async (req, res, next) => {
