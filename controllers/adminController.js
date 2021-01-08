@@ -3,6 +3,7 @@ const {
     User,
     Course
 } = require("../models");
+const Orders = require("../models/Orders");
 
 exports.getIndexAdminProfile = catchAsync(async (req, res, next) => {
     const courses = await Course.find().lean()
@@ -11,8 +12,10 @@ exports.getIndexAdminProfile = catchAsync(async (req, res, next) => {
     res.render('admin/courses', {
         layout: false,
         user,
-        courses
+        courses,
+        error: req.session.error
     })
+    req.session.destroy();
 })
 exports.getIndexUser = catchAsync(async (req, res, next) => {
     const users = await User.find({role: 'user'}).lean()
@@ -38,6 +41,14 @@ exports.deleteIndexUser = catchAsync(async(req,res,next) => {
     res.redirect("/admin")
 })
 exports.deleteIndexCourse = catchAsync(async(req,res,next) => {
+    const course = Orders.findOne({
+        course: req.params.idCourse
+    })
+    if(course) {
+        req.session.error = 'Course have User learning not delete'
+        res.redirect('/admin')
+        return;
+    }
     await Course.findByIdAndDelete(req.params.idCourse);
     res.redirect("/admin")
 })
