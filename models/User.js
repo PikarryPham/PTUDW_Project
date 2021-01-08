@@ -22,7 +22,6 @@ const userSchema = new mongoose.Schema(
       enum: ["user", "instructors", "admin"],
       default: "user",
     },
-
     password: {
       type: String,
       required: [true, "Please provide by password"],
