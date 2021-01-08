@@ -1,5 +1,5 @@
 const catchAsync = require("../utils/catchAsync");
-
+const crypto = require("crypto");
 const { User, Course } = require("../models/index");
 const APIFeatures = require("../utils/apiFeatures");
 
@@ -132,7 +132,7 @@ exports.restrictTo = (...roles) => {
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id).select("+password");
-
+  
   // 2) Check if posted current password is correct
   if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
     req.session.error = `Password current or password don't' match.`;
@@ -166,9 +166,10 @@ exports.protect = catchAsync(async (req, res, next) => {
 // get -> middle ->
 
 exports.getForgotPassword = catchAsync(async (req, res, next) => {
+  console.log('run here')
   res.render("forgot-password", {
     layout: false,
-    error: req.session.err,
+    error: req.session.error,
   });
   req.session.destroy();
 });
@@ -202,7 +203,10 @@ exports.postForgotPassword = catchAsync(async (req, res, next) => {
   };
 
   try {
-    await sgMail.send(msg).then(() => {
+    await sgMail.send(msg).then(async () => {
+      await user.save({
+        validateBeforeSave: false,
+      })
       res.render("forgot-password", {
         layout: false,
         notification: "Send Verify at Your Email Check it now",
@@ -238,8 +242,9 @@ exports.postRestPassword = catchAsync(async (req, res, next) => {
     },
   });
   if (!user) {
-    res.redirect("/forgotPassword");
     req.session.error = "Token is expired  ! Please Try again";
+    res.redirect("/forgotPassword");
+    
     return;
   }
   user.password = req.body.password;

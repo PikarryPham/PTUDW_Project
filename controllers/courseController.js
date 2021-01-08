@@ -137,8 +137,8 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
 
 exports.addOneCourse = catchAsync(async (req, res, next) => {
   req.body.instructors = req.user.id;
-
-  req.body.imageCover = req.file.path.split("\\").slice(1).join("/");
+  // Windows .spilt("\\")
+  req.body.imageCover = req.file.path.split("/").slice(1).join("/");
   const course = await Course.create(req.body);
 
   res.redirect(`/instructor/course/${course._id}/lesson`);

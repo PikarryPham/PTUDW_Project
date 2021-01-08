@@ -202,27 +202,27 @@
 							<span class="amount">
 								${{course.price}}</span>
 						</p>
+						{{#unless (ifCondAdminInstructor user.role)}}
+
 						{{#if isEnrolled}}
-							<a href="/user/learned/{{course._id}}"
+						<a href="/user/learned/{{course._id}}"
 							class="button-one">Learn Now</a>
 						{{else}}
-							{{#if (isAddWishList user course._id)}}
-								<a href="/course/{{course._id}}/orders"
+						{{#if (isAddWishList user course._id)}}
+						<a href="/course/{{course._id}}/orders"
 							class="button-one">Enroll
 							Now</a>
-							{{else}}
-							<a href="/course/{{course._id}}/orders"
+						{{else}}
+						<a href="/course/{{course._id}}/orders"
 							class="button-one">Enroll
 							Now</a>
-								<a href="/user/wish-list/{{course._id}}"
+						<a href="/user/wish-list/{{course._id}}"
 							class="button-one add-wish-list">Add
 							Your
-							Love List</a
-							{{/if}}
+							Love List</a>
 						{{/if}}
-						
-
-
+						{{/if}}
+						{{/unless}}
 						<div class="product-meta-info-list">
 							<h3>Course Features</h3>
 							<div class="meta-info-unit">
