@@ -62,39 +62,7 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
       select: "-created_at -updated_at -__v ",
     })
     .lean();
-  const bestSaleEqualCategory = await Course.aggregate([
-    {
-      $match: {
-        category: course.category,
-      },
-    },
-    {
-      $match: {
-        active: true,
-      },
-    },
-    {
-      $lookup: {
-        from: "orders",
-        localField: "_id",
-        foreignField: "course",
-        as: "total",
-      },
-    },
-    {
-      $addFields: {
-        subscribedGroupsLength: {
-          $size: "$total",
-        },
-      },
-    },
-    {
-      $sort: {
-        subscribedGroupsLength: -1,
-      },
-    },
-  ]);
-
+  const bestSaleEqualCategory = await Course.find({category:course.category }).sort({enrolled:-1}).limit(4).lean()
   const reviews = await Review.aggregate([
     {
       $match: {
@@ -124,7 +92,7 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
       },
     },
   ]);
-  console.log(isEnrolled);
+ 
   res.render("single-course", {
     user,
     reviews: reviews.length ? reviews[0].counts : [],

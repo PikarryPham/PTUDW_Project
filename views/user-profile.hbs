@@ -12,6 +12,11 @@
           {{error}}
         </div>
         {{/if}}
+        {{#if notification}}
+        <div class="alert alert-success" role="alert">
+          {{notification}}
+        </div>
+        {{/if}}
         <form class="edit-profile m-b30"
           action="/user/updateMe" method="POST">
           <div class="">

@@ -17,7 +17,7 @@ const sendErrorDev = (err, res) => {
     // res.render(err.pathUrlErr, {
     //     error: err.message
     // });
-    res.status(400).json({
+    res.render('404-page', {
         error: err.message
     })
 };

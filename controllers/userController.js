@@ -12,7 +12,8 @@ exports.getUserProfile = catchAsync(async (req, res, next) => {
     res.render('user-profile', {
         layout: false,
         user,
-        error: req.session.error
+        error: req.session.error,
+        notification: req.session.notification
     })
     req.session.destroy();
 })

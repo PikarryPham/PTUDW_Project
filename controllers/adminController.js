@@ -43,12 +43,22 @@ exports.deleteIndexUser = catchAsync(async(req,res,next) => {
 exports.deleteIndexCourse = catchAsync(async(req,res,next) => {
     const course = Orders.findOne({
         course: req.params.idCourse
-    })
-    if(course) {
-        req.session.error = 'Course have User learning not delete'
+    });
+    if(course.enrolled) {
+         req.session.error = 'Course have User learning not delete'
         res.redirect('/admin')
         return;
     }
     await Course.findByIdAndDelete(req.params.idCourse);
     res.redirect("/admin")
+})
+
+exports.getIndexCategory = catchAsync(async (req,res,next) => {
+    const user = await User.findById(req.signedCookies.jwt).lean();
+    
+    res.render('admin/add-category', {
+        layout: false,
+        user,
+        error: req.session.error
+    })
 })

@@ -5,6 +5,7 @@ const adminController = require('../controllers/adminController');
 router.use(authController.protect, authController.restrictTo('admin'))
 
 router.route('/').get(adminController.getIndexAdminProfile)
+router.route('/category').get(adminController.getIndexCategory)
 router.route('/course/:idCourse/delete').get(adminController.deleteIndexCourse)
 router.route('/user').get(adminController.getIndexUser)
 router.route('/user/:idUser/delete').get(adminController.deleteIndexUser)

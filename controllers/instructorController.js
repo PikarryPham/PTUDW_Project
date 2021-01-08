@@ -1,5 +1,6 @@
 const catchAsync = require("../utils/catchAsync");
-const { User, Course } = require("../models");
+const { User, Course,Orders } = require("../models");
+
 
 exports.getIndexEditCourse = catchAsync(async (req, res, next) => {
   const { idCourse } = req.params;
@@ -48,8 +49,15 @@ exports.getDeleteCourse = catchAsync(async (req, res, next) => {
     res.redirect("/profile");
     return;
   }
+  
+  if(course.enrolled) {
+    req.session.error = 'Course have User do not delete Course'
+     res.redirect("/profile");
+     return;
+  }
   course.active = false;
   await course.save();
+  req.session.notification = 'Delete Success Course'
   res.redirect("/profile");
 });
 
@@ -66,5 +74,6 @@ exports.getCompleteCourse = catchAsync(async (req, res, next) => {
   }
   course.isCompleted = true;
   await course.save();
+  req.session.notification ='Complete The Course Success !'
   res.redirect("/profile");
 });
