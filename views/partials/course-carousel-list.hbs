@@ -1,14 +1,14 @@
-<li data-index="rs-672" data-transition="fade"
+<li data-index="rs-{{dataId}}" data-transition="fade"
     data-slotamount="default" data-easein="default"
     data-easeout="default" data-masterspeed="default"
-    data-thumb="/upload/slider/slider-image-1.jpg"
+    data-thumb="/upload/slider/slider-image-{{index}}.jpg"
     data-rotate="0" data-saveperformance="off"
     data-title="unique" data-description="">
     <!-- MAIN IMAGE -->
-    <img src="/upload/slider/slider-image-1.jpg" alt=""
-        data-bgposition="center center" data-bgfit="cover"
-        data-bgrepeat="no-repeat" class="rev-slidebg"
-        data-no-retina>
+    <img src="/upload/slider/slider-image-{{index}}.jpg"
+        alt="" data-bgposition="center center"
+        data-bgfit="cover" data-bgrepeat="no-repeat"
+        class="rev-slidebg" data-no-retina>
     <!-- LAYERS -->
 
     <!-- LAYER NR. 1 -->
@@ -40,8 +40,8 @@
         data-transform_out="x:left;s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;"
         data-start="700" data-splitin="none"
         data-splitout="none" data-responsive_offset="on"
-        style="z-index: 6; min-width: 370px; max-width: 450px; white-space: normal;text-align:left;">
-        Business Analysis Fundamentals
+        style="z-index: 6; min-width: 370px; max-width: 450px; white-space: normal;text-align:left;font-size:22px !important; font-weight:700 !important;">
+        {{data.title}}
     </div>
 
     <!-- LAYER NR. 3 -->
@@ -72,11 +72,8 @@
         data-transform_out="x:left;s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;"
         data-start="800" data-splitin="none"
         data-splitout="none" data-responsive_offset="on"
-        style="z-index: 8; min-width: 370px; max-width: 450px; white-space: normal; text-align:left;">
-        We are long past the online
-        coursework and training that
-        involves video lectures,
-        unit plans and quizes!
+        style="z-index: 8; min-width: 370px; max-width: 450px; white-space: normal; text-align:left; ">
+        {{data.description}}
     </div>
 
     <!-- LAYER NR. 5 -->
@@ -93,13 +90,13 @@
         data-start="1100" data-splitin="none"
         data-splitout="none" data-responsive_offset="on"
         style="z-index: 10; min-width: 100px; max-width: 100px; white-space: normal; text-align:center;">
-        <img src="upload/slider/price-1.png" alt="">
+
     </div>
 
     <!-- LAYER NR. 6 -->
     <a class="tp-caption Woo-ProductInfo rev-btn tp-resizeme"
-        href="http://server.local/revslider/product/premium-computer-hardware/"
-        target="_self" id="slide-672-layer-6"
+        href="/course/{{data._id}}" target="_self"
+        id="slide-672-layer-6"
         data-x="['left','left','left','left']"
         data-hoffset="['40','40','40','35']"
         data-y="['top','top','top','top']"
@@ -112,7 +109,7 @@
         data-transform_out="x:left;s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;"
         data-start="1100" data-splitin="none"
         data-splitout="none" data-actions=''
-        data-responsive_offset="on">
+        data-responsive_offset="on" style="margin-top:15px">
         Enroll Now!
     </a>
 

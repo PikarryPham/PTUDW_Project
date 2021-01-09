@@ -37,5 +37,6 @@ exports.postOrderCheckOut = async (req, res, next) => {
     req.body.course = courseId
     req.body.price = course.price;
     await Orders.create(req.body)
-    res.redirect('/')
+    // redriect tới khoá học
+    res.redirect('/user/enrolledCourse')
 }

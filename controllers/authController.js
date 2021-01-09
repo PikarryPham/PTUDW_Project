@@ -101,7 +101,7 @@ exports.index = async (req, res) => {
     .sort({ onViewed: -1 })
     .limit(4)
     .lean();
-   const bestSaleCourses= await Course.find().sort({enrolled:-1}).limit(4).lean();
+   const bestSaleCourses= await Course.find().sort({enrolled:-1}).limit(3).lean();
   res.render("index", {
     user,
     newCourses,

@@ -47,4 +47,11 @@ module.exports = {
     }
     return true;
   },
+  increaseIndexByOne(index) {
+    return 1 + index ;
+  },
+  getDataIdByIndex(index) {
+    return 672 + index
+  },
+  
 };
