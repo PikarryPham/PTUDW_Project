@@ -62,7 +62,10 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
       select: "-created_at -updated_at -__v ",
     })
     .lean();
-  const bestSaleEqualCategory = await Course.find({category:course.category }).sort({enrolled:-1}).limit(4).lean()
+  const bestSaleEqualCategory = await Course.find({ category: course.category })
+    .sort({ enrolled: -1 })
+    .limit(4)
+    .lean();
   const reviews = await Review.aggregate([
     {
       $match: {
@@ -92,7 +95,7 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
       },
     },
   ]);
- 
+
   res.render("single-course", {
     user,
     reviews: reviews.length ? reviews[0].counts : [],
@@ -106,6 +109,7 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
 exports.addOneCourse = catchAsync(async (req, res, next) => {
   req.body.instructors = req.user.id;
   // Windows .spilt("\\")
+  console.log(req.body.imageCover);
   req.body.imageCover = req.file.path.split("\\").slice(1).join("/");
   const course = await Course.create(req.body);
 
