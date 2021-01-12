@@ -28,6 +28,10 @@ exports.getAllCourses = catchAsync(async (req, res, next) => {
     return course;
   });
 
+  if (req.query.sort === "rating") {
+    courses = courses.sort((a, b) => b.ratingsAverage - a.ratingsAverage);
+  }
+
   //atCourse để chứung minh nó ở router course để render nav
   res.render("course", {
     length: courses.length,
@@ -40,7 +44,11 @@ exports.getAllCourses = catchAsync(async (req, res, next) => {
 exports.getOneCourse = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const user = await User.findById(req.signedCookies.jwt).lean();
-  const course = await Course.findByIdAndUpdate(id, { $inc: { onViewed: 1 } })
+  const course = await Course.findByIdAndUpdate(id, {
+    $inc: {
+      onViewed: 1,
+    },
+  })
     .populate({
       path: "instructors",
       select: "+description",
@@ -62,8 +70,12 @@ exports.getOneCourse = catchAsync(async (req, res, next) => {
       select: "-created_at -updated_at -__v ",
     })
     .lean();
-  const bestSaleEqualCategory = await Course.find({ category: course.category })
-    .sort({ enrolled: -1 })
+  const bestSaleEqualCategory = await Course.find({
+    category: course.category,
+  })
+    .sort({
+      enrolled: -1,
+    })
     .limit(4)
     .lean();
   const reviews = await Review.aggregate([
