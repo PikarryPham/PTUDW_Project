@@ -5,3 +5,16 @@ COOKIES_SECRET= MY SECRET
 EMAIL_SEND_GIRD_DOMAIN = a36311@thanglong.edu.vn
 
 Change path "/" into path "\\"
+
+---NOTES ABOUT PROJECT---
+Missing Features:
+Không có 2 cấp lĩnh vực (ví dụ k phân ra IT --> mobile dev and web dev)
+Những khóa học mới đăng sẽ có dòng chữ new course --> k có best seller
+Xác nhận OTP khi quên mật khẩu bằng việc sử dụng sendgrid
+Không có tính năng xóa lĩnh vực (đối với admin) --> chỉ có thể thêm lĩnh vực mới
+
+
+
+
+
+
