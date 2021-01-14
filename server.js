@@ -1,5 +1,6 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
+const MongoClient = require('mongodb').MongoClient;
 const app = require("./app");
 process.on("uncaughtException", err => {
   console.log("UNCAUGHT EXCEPTION REJECTION! ");
@@ -24,6 +25,9 @@ app.listen(port, () => {
 /**
  * Phan trang
  */
+
+
+
 process.on("unhandleRejection", err => {
   console.log("UNHANDLER REJECTION! ");
   console.log(err.name, err.message);
