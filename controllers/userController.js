@@ -37,7 +37,7 @@ exports.updateMe = async (req, res, next) => {
     req.session.notification = "Update User Success fully";
     res.redirect("/profile");
   } catch (err) {
-    req.session.error = "This email have user used";
+    req.session.error = err.message;
     res.redirect("/profile");
   }
 };

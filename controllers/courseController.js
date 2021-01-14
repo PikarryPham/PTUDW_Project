@@ -123,7 +123,8 @@ exports.addOneCourse = async (req, res, next) => {
     req.body.instructors = req.user.id;
     // Windows .spilt("\\")
 
-    req.body.imageCover = req.file.path.split("/").slice(1).join("/");
+    req.body.imageCover = req.file.path.split("\\").slice(1).join("/");
+    //neu chay tren heroku --> req.body.imageCover = req.file.path.split("/").slice(1).join("/");
 
     const course = await Course.create(req.body);
 

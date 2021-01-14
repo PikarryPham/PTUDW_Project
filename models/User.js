@@ -7,6 +7,8 @@ const userSchema = new mongoose.Schema(
     name: {
       type: String,
       required: [true, "Please tell us your name"],
+      minlength: 3,
+      maxlength: 4,
     },
     address: {
       type: String,
@@ -97,7 +99,7 @@ userSchema.methods.createPasswordResetToken = function () {
     .createHash("sha256")
     .update(resetToken)
     .digest("hex");
-  console.log(this.passwordResetToken)
+  console.log(this.passwordResetToken);
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
   return resetToken;
 };
