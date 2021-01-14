@@ -9,7 +9,7 @@ process.on("uncaughtException", err => {
 });
 
 mongoose
-  .connect(process.env.MONG_URL, {
+  .connect(process.env.MONG_URL || "mongodb://localhost:27017/PTUDW", {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
