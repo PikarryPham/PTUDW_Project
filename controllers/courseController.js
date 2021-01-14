@@ -122,14 +122,15 @@ exports.addOneCourse = async (req, res, next) => {
   try {
     req.body.instructors = req.user.id;
     // Windows .spilt("\\")
-    console.log(req.body.imageCover);
-    req.body.imageCover = req.file.path.split("\\").slice(1).join("/");
-    const course = await Course.create(req.body);
 
-    res.redirect(`/instructor/course/${course._id}/lesson`);
+    req.body.imageCover = req.file.path.split("\\").slice(1).join("/");
+    const a = req.file.path.split("\\").join("/");
+    //const course = await Course.create(req.body);
+    res.redirect(`/instructor/${a}/${req.file.path}`);
+    //res.redirect(`/instructor/course/${course._id}/lesson`);
   } catch (err) {
     req.session.error = err.message;
-    req.session.data = req.file.path.split("/").slice(1).join("/");
+    req.session.data = req.file.path;
     res.redirect("/profile");
   }
 };
