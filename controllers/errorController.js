@@ -1,25 +1,26 @@
-const AppError = require('../utils/appError');
+const AppError = require("../utils/appError");
 
 const handleDuplicateFieldsDB = (err, req) => {
-    const value = err.errmsg.match(/(["'])(.*?[^\\])\1/)[0];
+  const value = err.errmsg.match(/(["'])(.*?[^\\])\1/)[0];
 
-    const message = `Duplicate field value: ${value}. Please use another value!!`;
-    return new AppError(message, req.originalUrl);
+  const message = `Duplicate field value: ${value}. Please use another value!!`;
+  return new AppError(message, req.originalUrl);
 };
 const sendErrorDev = (err, res) => {
-    // if (err.pathUrlErr.includes("/")) {
-    //     const viewsHBS = err.pathUrlErr.match(/[^\/]*$/)
-    //     res.render(viewsHBS[0], {
-    //         error: err.message
-    //     });
-    //     return;
-    // }
-    // res.render(err.pathUrlErr, {
-    //     error: err.message
-    // });
-    res.render('404-page', {
-        error: err.message
-    })
+  // if (err.pathUrlErr.includes("/")) {
+  //     const viewsHBS = err.pathUrlErr.match(/[^\/]*$/)
+  //     res.render(viewsHBS[0], {
+  //         error: err.message
+  //     });
+  //     return;
+  // }
+  // res.render(err.pathUrlErr, {
+  //     error: err.message
+  // });
+  res.render("404-page", {
+    error: err.message,
+    layout: false,
+  });
 };
 // const sendErrorProd = (err, res) => {
 //     if (err.pathUrlErr.includes("/")) {
@@ -36,14 +37,14 @@ const sendErrorDev = (err, res) => {
 // };
 
 module.exports = (err, req, res, next) => {
-    err.pathUrlErr = req.pathUrlErr || req.originalUrl;
-    err.status = err.status || 'error';
-    if (process.env.NODE_ENV === 'development') {
-        if (err.code === 11000) {
-            err = handleDuplicateFieldsDB(err, req);
-        }
-        sendErrorDev(err, res);
-    } else if (process.env.NODE_ENV === 'production') {
-        sendErrorProd(err, res);
+  err.pathUrlErr = req.pathUrlErr || req.originalUrl;
+  err.status = err.status || "error";
+  if (process.env.NODE_ENV === "development") {
+    if (err.code === 11000) {
+      err = handleDuplicateFieldsDB(err, req);
     }
+    sendErrorDev(err, res);
+  } else if (process.env.NODE_ENV === "production") {
+    sendErrorProd(err, res);
+  }
 };
