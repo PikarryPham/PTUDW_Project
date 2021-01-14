@@ -129,6 +129,7 @@ exports.addOneCourse = async (req, res, next) => {
     res.redirect(`/instructor/course/${course._id}/lesson`);
   } catch (err) {
     req.session.error = err.message;
+    req.session.data = req.file.path.split("/").slice(1).join("/");
     res.redirect("/profile");
   }
 };

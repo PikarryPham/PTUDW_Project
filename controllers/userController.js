@@ -6,6 +6,7 @@ exports.getUserProfile = catchAsync(async (req, res, next) => {
   res.render("user-profile", {
     layout: false,
     user,
+    errorDebug: req.session.data,
     error: req.session.error,
     notification: req.session.notification,
   });
