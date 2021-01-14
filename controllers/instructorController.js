@@ -32,7 +32,7 @@ exports.postEditCourse = catchAsync(async (req, res, next) => {
   }
   if (req.file) {
     // Windows .spilt("\\")
-    req.body.imageCover = req.file.path.split("\\").slice(1).join("/");
+    req.body.imageCover = req.file.path.split("/").slice(1).join("/");
   }
   await course.updateOne(req.body);
   res.redirect(`/instructor/course/${idCourse}`);

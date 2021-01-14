@@ -44,7 +44,7 @@ exports.postAddVideo = catchAsync(async (req, res, next) => {
     return;
   }
   req.body.isLooked = req.body.isLooked === "true" ? true : false;
-  req.body.pathUrl = req.file.path.split("\\").slice(1).join("/");
+  req.body.pathUrl = req.file.path.split("/").slice(1).join("/");
   await Video.create(req.body);
   res.redirect("/profile");
 });
